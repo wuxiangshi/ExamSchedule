@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Schedule</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <button id="fullscreen-btn">全屏</button>
+    <div class="container">
+        <h1 id="examName"></h1>
+        <p id="message"></p>
+        <div class="content">
+            <div class="left-column">
+                <div id="current-time"></div>
+                <div id="current-subject"></div>
+                <div id="exam-timing"></div>
+                <div id="remaining-time"></div>
+                <div id="status"></div>
+            </div>
+            <div class="right-column">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>科目</th>
+                            <th>开始</th>
+                            <th>结束</th>
+                        </tr>
+                    </thead>
+                    <tbody id="exam-table-body">
+                        <!-- Dynamically filled by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
