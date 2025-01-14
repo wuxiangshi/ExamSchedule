@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const remainingSeconds = Math.floor(remainingTime % 60);
             const remainingTimeText = `剩余时间: ${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
 
-            if (remainingHours === 0 && remainingMinutes <= 15) {
+            if (remainingHours === 0 && remainingMinutes <= 14) {
                 remainingTimeElem.textContent = remainingTimeText;
                 remainingTimeElem.style.color = "red";
                 remainingTimeElem.style.fontWeight = "bold";
