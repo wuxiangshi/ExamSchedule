@@ -2,14 +2,27 @@ body {
     font-family: 'HarmonyOS Sans SC Regular', Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background: url('/background.jpg') no-repeat center center fixed;
+    background-size: cover;
     background-color: #121212;
     animation: fadeIn 1s;
     color: #e0e0e0;
+    overflow: hidden; /* 隐藏滚动条 */
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
+}
+
+/* 隐藏滚动条但允许滚动 */
+body::-webkit-scrollbar {
+    display: none;
+}
+
+body {
+    -ms-overflow-style: none;  /* IE 和 Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 #fullscreen-btn {
@@ -56,7 +69,7 @@ body {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: #1f1f1f;
+    background-color: rgba(31, 31, 31, 0.8); /* 80% 透明度 */
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
 }

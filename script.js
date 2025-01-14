@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
             remainingTimeElem.textContent = "剩余时间: -";
-            statusElem.textContent = "状态: 即将开始";
+            statusElem.textContent = "状态: 未开始";
             statusElem.style.color = "orange";
         } else {
             currentSubjectElem.textContent = "当前无考试";
