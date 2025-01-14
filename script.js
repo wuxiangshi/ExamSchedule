@@ -8,9 +8,22 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusElem = document.getElementById("status");
     const examTableBodyElem = document.getElementById("exam-table-body");
     const fullscreenBtn = document.getElementById("fullscreen-btn");
+    const settingsBtn = document.getElementById("settings-btn");
+    const settingsModal = document.getElementById("settings-modal");
+    const closeSettingsBtn = document.getElementById("close-settings-btn");
+    const saveSettingsBtn = document.getElementById("save-settings-btn");
+    const offsetTimeInput = document.getElementById("offset-time");
+    const roomInput = document.getElementById("room-input");
+    const roomElem = document.getElementById("room");
+
+    let offsetTime = getCookie("offsetTime") || 0;
+    let room = getCookie("room") || "";
+
+    offsetTime = parseInt(offsetTime);
+    roomElem.textContent = room;
 
     function fetchData() {
-        fetch('exam_config.json')
+        fetch('exam_config.json', { cache: "no-store" }) // 不保留缓存
             .then(response => response.json())
             .then(data => {
                 displayExamInfo(data);
@@ -30,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateCurrentTime() {
-        const now = new Date();
+        const now = new Date(new Date().getTime() + offsetTime * 1000);
         currentTimeElem.textContent = now.toLocaleTimeString('zh-CN', { hour12: false });
     }
 
@@ -40,13 +53,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function updateExamInfo(data) {
-        const now = new Date();
+        const now = new Date(new Date().getTime() + offsetTime * 1000);
         let currentExam = null;
         let nextExam = null;
 
         data.examInfos.forEach(exam => {
-            const start = new Date(exam.start);
-            const end = new Date(exam.end);
+            const start = new Date(new Date(exam.start).getTime() + offsetTime * 1000);
+            const end = new Date(new Date(exam.end).getTime() + offsetTime * 1000);
             if (now >= start && now <= end) {
                 currentExam = exam;
             }
@@ -93,8 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update next exams table
         examTableBodyElem.innerHTML = "";
         data.examInfos.forEach(exam => {
-            const start = new Date(exam.start);
-            const end = new Date(exam.end);
+            const start = new Date(new Date(exam.start).getTime() + offsetTime * 1000);
+            const end = new Date(new Date(exam.end).getTime() + offsetTime * 1000);
             let status = "";
             if (now < start) {
                 status = "即将开始";
@@ -125,6 +138,48 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     });
+
+    // Open settings modal
+    settingsBtn.addEventListener("click", () => {
+        offsetTimeInput.value = offsetTime;
+        roomInput.value = room;
+        settingsModal.style.display = "block";
+    });
+
+    // Close settings modal
+    closeSettingsBtn.addEventListener("click", () => {
+        settingsModal.style.display = "none";
+    });
+
+    // Save settings
+    saveSettingsBtn.addEventListener("click", () => {
+        offsetTime = parseInt(offsetTimeInput.value);
+        room = roomInput.value;
+        setCookie("offsetTime", offsetTime, 365);
+        setCookie("room", room, 365);
+        roomElem.textContent = room;
+        settingsModal.style.display = "none";
+    });
+
+    // Utility function to set a cookie
+    function setCookie(name, value, days) {
+        const d = new Date();
+        d.setTime(d.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + d.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/";
+    }
+
+    // Utility function to get a cookie
+    function getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
+    }
 
     fetchData();
 });
