@@ -5,12 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Schedule</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <button id="settings-btn">设置</button>
     <button id="fullscreen-btn">全屏</button>
     <div class="container">
-        <h1 id="examName"></h1>
+        <h1 id="examName">
+            考试安排
+            <span id="room"></span>
+        </h1>
         <p id="message"></p>
         <div class="content">
             <div class="left-column">
@@ -25,8 +28,8 @@
                     <thead>
                         <tr>
                             <th>科目</th>
-                            <th>开始</th>
-                            <th>结束</th>
+                            <th>开始时间</th>
+                            <th>结束时间</th>
                         </tr>
                     </thead>
                     <tbody id="exam-table-body">
@@ -34,6 +37,17 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <!-- Settings Modal -->
+    <div id="settings-modal">
+        <div id="settings-modal-content">
+            <label for="offset-time">偏移时间（秒）:</label>
+            <input type="number" id="offset-time" name="offset-time" value="0">
+            <label for="room-input">考场号:</label>
+            <input type="text" id="room-input" name="room-input" value="">
+            <button id="save-settings-btn">确定</button>
+            <button id="close-settings-btn">关闭</button>
         </div>
     </div>
     <script src="script.js"></script>
