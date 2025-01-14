@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     roomElem.textContent = room;
 
     function fetchData() {
-        fetch('exam_config.json', { cache: "no-store" }) // 不保留缓存
+        return fetch('exam_config.json', { cache: "no-store" }) // 不保留缓存
             .then(response => response.json())
             .then(data => {
                 displayExamInfo(data);
@@ -37,7 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function displayExamInfo(data) {
         // Display exam name
-        examNameElem.textContent = data.examName;
+        const prefix = "考试安排";
+        const currentText = examNameElem.textContent;
+        const newText = `${data.examName}`;
+        examNameElem.textContent = currentText.replace(/考试安排.*/, newText);
         // Display message
         messageElem.textContent = data.message;
     }

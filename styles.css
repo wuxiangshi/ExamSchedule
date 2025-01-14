@@ -4,25 +4,14 @@ body {
     padding: 0;
     background: url('/background.jpg') no-repeat center center fixed;
     background-size: cover;
-    background-color: #121212;
     animation: fadeIn 1s;
     color: #e0e0e0;
-    overflow: hidden; /* 隐藏滚动条 */
+    overflow: hidden;
 }
 
 @keyframes fadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
-}
-
-/* 隐藏滚动条但允许滚动 */
-body::-webkit-scrollbar {
-    display: none;
-}
-
-body {
-    -ms-overflow-style: none;  /* IE 和 Edge */
-    scrollbar-width: none;  /* Firefox */
 }
 
 #fullscreen-btn {
@@ -38,6 +27,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1001;
 }
 
 #settings-btn {
@@ -53,6 +43,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
+    z-index: 1001;
 }
 
 #settings-btn:hover {
@@ -69,9 +60,10 @@ body {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: rgba(31, 31, 31, 0.8); /* 80% 透明度 */
+    background-color: #1f1f1f;
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    opacity: 0.8;
 }
 
 h1 {
@@ -93,7 +85,7 @@ h1 {
 
 #message {
     font-size: 1.5rem;
-    color: #bb86fc;
+    color: #e08e0e;
     margin-bottom: 20px;
 }
 
@@ -115,7 +107,7 @@ h1 {
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    color: #bb86fc;
+    color: #e08e0e;
 }
 
 #current-subject, #exam-timing, #remaining-time, #status {
@@ -142,9 +134,9 @@ th, td {
 
 th {
     background-color: #333;
-    color: #bb86fc;
+    color: #ea8925;
     font-weight: bold;
-    border-bottom: 2px solid #bb86fc;
+    border-bottom: 2px solid #ea8925;
 }
 
 .exam-status-进行中 td {
@@ -152,7 +144,7 @@ th {
 }
 
 .exam-status-即将开始 td {
-    color: white !important; /* 白色字体 */
+    color: orange !important; /* 橙色字体 */
 }
 
 .exam-status-已结束 td {
