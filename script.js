@@ -74,18 +74,18 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentExam) {
             currentSubjectElem.textContent = `当前科目: ${currentExam.name}`;
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(currentExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(currentExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
-            const remainingTime = (new Date(currentExam.end) - now) / 1000;
+            const remainingTime = (new Date(currentExam.end).getTime() - now.getTime()) / 1000;
             const remainingHours = Math.floor(remainingTime / 3600);
             const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
             const remainingSeconds = Math.floor(remainingTime % 60);
             const remainingTimeText = `剩余时间: ${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
 
             if (remainingHours === 0 && remainingMinutes <= 14) {
-                remainingTimeElem.textContent = remainingTimeText;
+                remainingTimeElem.textContent = `倒计时：` & remainingTimeText;
                 remainingTimeElem.style.color = "red";
                 remainingTimeElem.style.fontWeight = "bold";
             } else {
-                remainingTimeElem.textContent = remainingTimeText;
+                remainingTimeElem.textContent = `剩余时间：` & remainingTimeText;
                 remainingTimeElem.style.color = "#93b4f7";
                 remainingTimeElem.style.fontWeight = "normal";
             }
@@ -95,11 +95,12 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (nextExam) {
             currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
-            remainingTimeElem.textContent = "剩余时间: -";
+            remainingTimeElem.textContent = "当前无考试";
+            remainingTimeElem.style.color = "#93b4f7";
             statusElem.textContent = "状态: 未开始";
             statusElem.style.color = "orange";
         } else {
-            currentSubjectElem.textContent = "当前无考试";
+            currentSubjectElem.textContent = "考试均已结束";
             examTimingElem.textContent = "";
             remainingTimeElem.textContent = "";
             statusElem.textContent = "状态: 空闲";
