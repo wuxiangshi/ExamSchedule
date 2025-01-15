@@ -81,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const remainingTimeText = `剩余时间: ${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
 
             if (remainingHours === 0 && remainingMinutes <= 14) {
-                remainingTimeElem.textContent = `倒计时：` & remainingTimeText;
+                remainingTimeElem.textContent = `倒计时：` && remainingTimeText;
                 remainingTimeElem.style.color = "red";
                 remainingTimeElem.style.fontWeight = "bold";
             } else {
-                remainingTimeElem.textContent = `剩余时间：` & remainingTimeText;
+                remainingTimeElem.textContent = `剩余时间：` && remainingTimeText;
                 remainingTimeElem.style.color = "#93b4f7";
                 remainingTimeElem.style.fontWeight = "normal";
             }
