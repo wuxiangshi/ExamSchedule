@@ -1,55 +1,85 @@
+<!--
+					   _ooOoo_
+					  o8888888o
+					  88" . "88
+					  (| -_- |)
+					  O\  =  /O
+				   ____/---\____
+				 .'  \\|     |//  '.
+				/  \\|||  :  |||//  \
+			   /  _||||| -:- |||||-  \
+			   |   | \\\  -  /// |   |
+			   | _|  ''---/''  |   |
+			   \  .-\__  `-`  ___/-. /
+			 ___`. .'  /--.--\  `. . __
+		  ."" '<  `.___\_<|>_/___.'  >'"".
+		 | | :  `- \.;`\ _ /';.\ - ` : | |
+		 \  \ `-.   \_ __\ /__ _/   .-\ /  /
+	======`-.____`-.___\_____/___.-`____.-'======
+					   `=---='
+	^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+			 佛祖保佑       永无BUG
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="shortcut icon" href="/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exam Schedule</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>选择页面</title>
+    <style>
+        body {
+            background-image: url('/background.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Helvetica Neue', sans-serif;
+        }
+        h1 {
+            color: white;
+            font-size: 36px; /* 更大一点 */
+            text-align: center;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            animation: fadeInUp 1s ease-in-out;
+        }
+        li {
+            margin-bottom: 20px; /* 增加间距 */
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold; /* 加粗链接文本 */
+            transition: color 0.3s ease; /* 添加过渡效果 */
+        }
+        a:hover {
+            color: #f8d800; /* 鼠标悬停时的颜色 */
+        }
+        @keyframes fadeInUp {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
 </head>
 <body>
-    <button id="settings-btn">设置</button>
-    <button id="fullscreen-btn">全屏</button>
-    <div class="container">
-        <h1 id="examName">
-            考试安排
-            <span id="room"></span>
-        </h1>
-        <p id="message"></p>
-        <div class="content">
-            <div class="left-column">
-                <div id="current-time"></div>
-                <div id="current-subject"></div>
-                <div id="exam-timing"></div>
-                <div id="remaining-time"></div>
-                <div id="status"></div>
-            </div>
-            <div class="right-column">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>科目</th>
-                            <th>开始时间</th>
-                            <th>结束时间</th>
-                        </tr>
-                    </thead>
-                    <tbody id="exam-table-body">
-                        <!-- Dynamically filled by JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- Settings Modal -->
-    <div id="settings-modal">
-        <div id="settings-modal-content">
-            <label for="offset-time">偏移时间（秒）:</label>
-            <input type="number" id="offset-time" name="offset-time" value="0">
-            <label for="room-input">考场号:</label>
-            <input type="text" id="room-input" name="room-input" value="">
-            <button id="save-settings-btn">确定</button>
-            <button id="close-settings-btn">关闭</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    <h1>选择版本：</h1>
+    <ul>
+        <li><a href="./time/">电子钟表</a></li>
+        <li><a href="./exam/">考试看板</a></li>
+    </ul>
 </body>
 </html>
