@@ -61,8 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let nextExam = null;
 
         data.examInfos.forEach(exam => {
-            const start = new Date(new Date(exam.start).getTime() + offsetTime * 1000);
-            const end = new Date(new Date(exam.end).getTime() + offsetTime * 1000);
+            const start = new Date(exam.start);
+            const end = new Date(exam.end);
             if (now >= start && now <= end) {
                 currentExam = exam;
             }
@@ -78,14 +78,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const remainingHours = Math.floor(remainingTime / 3600);
             const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
             const remainingSeconds = Math.floor(remainingTime % 60);
-            const remainingTimeText = `剩余时间: ${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
+            const remainingTimeText = `${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
 
             if (remainingHours === 0 && remainingMinutes <= 14) {
-                remainingTimeElem.textContent = `倒计时：` && remainingTimeText;
+                remainingTimeElem.textContent = `倒计时：${remainingTimeText}`;
                 remainingTimeElem.style.color = "red";
                 remainingTimeElem.style.fontWeight = "bold";
             } else {
-                remainingTimeElem.textContent = `剩余时间：` && remainingTimeText;
+                remainingTimeElem.textContent = `剩余时间：${remainingTimeText}`;
                 remainingTimeElem.style.color = "#93b4f7";
                 remainingTimeElem.style.fontWeight = "normal";
             }
@@ -110,8 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // Update next exams table
         examTableBodyElem.innerHTML = "";
         data.examInfos.forEach(exam => {
-            const start = new Date(new Date(exam.start).getTime() + offsetTime * 1000);
-            const end = new Date(new Date(exam.end).getTime() + offsetTime * 1000);
+            const start = new Date(exam.start);
+            const end = new Date(exam.end);
             let status = "";
             if (now < start) {
                 status = "即将开始";
