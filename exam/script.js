@@ -43,6 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
         examNameElem.textContent = currentText.replace(/考试安排.*/, newText);
         // Display message
         messageElem.textContent = data.message;
+        roomElem.style.position = "absolute";
+        roomElem.style.right = "20px";
     }
 
     function updateCurrentTime() {
