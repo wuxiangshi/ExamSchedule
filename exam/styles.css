@@ -87,7 +87,7 @@ h1 {
 
 #message {
     font-size: 1.5rem;
-    color: #e08e0e;
+    color: #16a3d1;
     margin-bottom: 20px;
 }
 
@@ -98,9 +98,9 @@ h1 {
 
 .left-column, .right-column {
     width: 48%;
-    background-color: #1f1f1f;
+    background-color: rgba(31, 31, 31, 0.2);
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
 }
 
@@ -109,7 +109,7 @@ h1 {
     font-weight: bold;
     text-align: center;
     margin-bottom: 20px;
-    color: #e08e0e;
+    color: #7cc3fb;
 }
 
 #current-subject, #exam-timing, #remaining-time, #status {
@@ -124,7 +124,7 @@ table {
     border-collapse: collapse;
     margin-top: 20px;
     border: 1px solid #333;
-    background-color: #1f1f1f;
+    background-color: rgba(31, 31, 31, 0.5);
 }
 
 th, td {
@@ -136,21 +136,21 @@ th, td {
 
 th {
     background-color: #333;
-    color: #ea8925;
+    color: #7cc3fb;
     font-weight: bold;
-    border-bottom: 2px solid #ea8925;
+    border-bottom: 2px solid #2b71ad;
 }
 
 .exam-status-进行中 td {
-    color: green !important; /* 绿色字体 */
+    color: #5ba838 !important; /* 绿色字体 */
 }
 
 .exam-status-即将开始 td {
-    color: orange !important; /* 橙色字体 */
+    color: #fe9901 !important; /* 橙色字体 */
 }
 
 .exam-status-已结束 td {
-    color: red !important; /* 红色字体 */
+    color: #ec0434 !important; /* 红色字体 */
 }
 
 .exam-status-空闲 td {
@@ -226,7 +226,7 @@ td:last-child {
     padding: 10px 20px;
     font-size: 2rem;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #93b4f7;
     color: white;
     border: none;
     border-radius: 5px;
