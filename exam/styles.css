@@ -60,10 +60,9 @@ body {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: #1f1f1f;
+    background-color: rgba(31, 31, 31, 0.8); /* 使用rgba设置背景透明度 */
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    opacity: 0.8;
 }
 
 h1 {
@@ -81,8 +80,9 @@ h1 {
     font-size: 3.5rem;
     font-weight: bold;
     color: #e0e0e0;
-    position: absolute;
-    right: 20px;
+    position: relative;
+    right: 0;
+    margin-left: 20px; /* 调整位置使其保持在container中 */
 }
 
 #message {

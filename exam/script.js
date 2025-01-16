@@ -15,9 +15,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const offsetTimeInput = document.getElementById("offset-time");
     const roomInput = document.getElementById("room-input");
     const roomElem = document.getElementById("room");
+    const zoomInput = document.getElementById("zoom-input");
 
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
+    let zoomLevel = getCookie("zoomLevel") || 1;
 
     offsetTime = parseInt(offsetTime);
     roomElem.textContent = room;
@@ -37,14 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function displayExamInfo(data) {
         // Display exam name
-        const prefix = "考试安排";
-        const currentText = examNameElem.textContent;
-        const newText = `${data.examName}`;
-        examNameElem.textContent = currentText.replace(/考试安排.*/, newText);
+        const examNameText = data.examName;
+        const roomText = roomElem.textContent;
+        examNameElem.innerHTML = `${examNameText} <span id="room">${roomText}</span>`;
         // Display message
         messageElem.textContent = data.message;
-        roomElem.style.position = "absolute";
-        roomElem.style.right = "20px";
     }
 
     function updateCurrentTime() {
@@ -149,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
     settingsBtn.addEventListener("click", () => {
         offsetTimeInput.value = offsetTime;
         roomInput.value = room;
+        zoomInput.value = zoomLevel;
         settingsModal.style.display = "block";
     });
 
@@ -161,11 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
     saveSettingsBtn.addEventListener("click", () => {
         offsetTime = parseInt(offsetTimeInput.value);
         room = roomInput.value;
+        zoomLevel = parseFloat(zoomInput.value);
         setCookie("offsetTime", offsetTime, 365);
         setCookie("room", room, 365);
+        setCookie("zoomLevel", zoomLevel, 365);
         roomElem.textContent = room;
+        document.body.style.zoom = zoomLevel;
         settingsModal.style.display = "none";
     });
+
+    document.body.style.zoom = zoomLevel;
 
     // Utility function to set a cookie
     function setCookie(name, value, days) {
