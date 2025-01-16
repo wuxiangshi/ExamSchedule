@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentExam) {
             currentSubjectElem.textContent = `当前科目: ${currentExam.name}`;
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(currentExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(currentExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
-            const remainingTime = (new Date(currentExam.end).getTime() - now.getTime()) / 1000;
+            const remainingTime = (new Date(currentExam.end).getTime() - now.getTime() + 1000) / 1000;
             const remainingHours = Math.floor(remainingTime / 3600);
             const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
             const remainingSeconds = Math.floor(remainingTime % 60);
