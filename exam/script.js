@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             statusElem.textContent = "状态: 进行中";
-            statusElem.style.color = "green";
+            statusElem.style.color = "#5ba838";
         } else if (nextExam) {
             currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;

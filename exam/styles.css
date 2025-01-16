@@ -60,9 +60,9 @@ body {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: rgba(31, 31, 31, 0.8); /* 使用rgba设置背景透明度 */
+    background-color: rgba(31, 31, 31, 0.5); /* 使用rgba设置背景透明度 */
     border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 h1 {
