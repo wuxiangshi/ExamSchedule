@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 remainingTimeElem.style.color = "red";
                 remainingTimeElem.style.fontWeight = "bold";
             } else {
-                remainingTimeElem.textContent = `剩余时: ${remainingTimeText}`;
+                remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
                 remainingTimeElem.style.color = "#93b4f7";
                 remainingTimeElem.style.fontWeight = "normal";
             }
@@ -94,13 +94,28 @@ document.addEventListener("DOMContentLoaded", () => {
             statusElem.textContent = "状态: 进行中";
             statusElem.style.color = "#5ba838";
         } else if (nextExam) {
-            currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
+            const timeUntilStart = ((new Date(nextExam.start).getTime() - now.getTime()) / 1000) + 1;
+            const remainingHours = Math.floor(timeUntilStart / 3600);
+            const remainingMinutes = Math.floor((timeUntilStart % 3600) / 60);
+            const remainingSeconds = Math.floor(timeUntilStart % 60);
+            const remainingTimeText = `${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
+
+            if (timeUntilStart <= 15 * 60) {
+                currentSubjectElem.textContent = `即将开始: ${nextExam.name}`;
+                remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
+                remainingTimeElem.style.color = "orange";
+                remainingTimeElem.style.fontWeight = "bold";
+                statusElem.textContent = "状态: 即将开始";
+                statusElem.style.color = "#DBA014";
+            } else {
+                currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
+                remainingTimeElem.textContent = "";
+                statusElem.textContent = "状态: 未开始";
+                remainingTimeElem.style.fontWeight = "normal";
+                statusElem.style.color = "#EAEE5B";
+            }
+
             examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
-            remainingTimeElem.textContent = "当前无考试";
-            remainingTimeElem.style.color = "#93b4f7";
-            statusElem.textContent = "状态: 未开始";
-            statusElem.style.fontWeight = "normal";
-            statusElem.style.color = "orange";
         } else {
             currentSubjectElem.textContent = "考试均已结束";
             examTimingElem.textContent = "";
