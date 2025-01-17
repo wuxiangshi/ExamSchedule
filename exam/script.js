@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const now = new Date(new Date().getTime() + offsetTime * 1000);
         let currentExam = null;
         let nextExam = null;
+        let lastExam = null;
 
         data.examInfos.forEach(exam => {
             const start = new Date(exam.start);
@@ -69,6 +70,9 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             if (!currentExam && !nextExam && now < start) {
                 nextExam = exam;
+            }
+            if (now > end && (!lastExam || end > new Date(lastExam.end))) {
+                lastExam = exam;
             }
         });
 
@@ -93,6 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
             statusElem.textContent = "状态: 进行中";
             statusElem.style.color = "#5ba838";
+        } else if (lastExam && now < new Date(lastExam.end).getTime() + 60000) {
+            const timeSinceEnd = (now.getTime() - new Date(lastExam.end).getTime()) / 1000;
+            currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
+            examTimingElem.textContent = "";
+            remainingTimeElem.textContent = ``;
+            statusElem.textContent = "状态: 已结束";
+            statusElem.style.color = "red";
         } else if (nextExam) {
             const timeUntilStart = ((new Date(nextExam.start).getTime() - now.getTime()) / 1000) + 1;
             const remainingHours = Math.floor(timeUntilStart / 3600);
