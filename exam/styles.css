@@ -6,7 +6,12 @@ body {
     background-size: cover;
     animation: fadeIn 1s;
     color: #e0e0e0;
-    overflow: hidden;
+    overflow: auto; /* 允许页面滚动 */
+}
+
+/* 隐藏滚动条 */
+body::-webkit-scrollbar {
+    display: none;
 }
 
 @keyframes fadeIn {
