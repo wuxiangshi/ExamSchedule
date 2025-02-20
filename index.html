@@ -37,12 +37,16 @@
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Helvetica Neue', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 使用更现代的字体 */
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5); /* 添加半透明背景 */
+            backdrop-filter: blur(5px); /* 添加背景模糊效果 */
         }
         h1 {
-            color: white;
-            font-size: 36px; /* 更大一点 */
+            color: #fff;
+            font-size: 48px;
             text-align: center;
+            margin-bottom: 30px;
             animation: fadeInUp 1s ease-in-out;
         }
         ul {
@@ -52,16 +56,23 @@
             animation: fadeInUp 1s ease-in-out;
         }
         li {
-            margin-bottom: 20px; /* 增加间距 */
+            margin-bottom: 30px;
         }
         a {
-            color: white;
+            color: #fff;
             text-decoration: none;
-            font-weight: bold; /* 加粗链接文本 */
-            transition: color 0.3s ease; /* 添加过渡效果 */
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px 30px;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            display: inline-block;
         }
         a:hover {
-            color: #f8d800; /* 鼠标悬停时的颜色 */
+            background-color: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
         @keyframes fadeInUp {
             0% {
@@ -83,8 +94,8 @@
     </ul>
 
     <!-- 添加GitHub图标跳转项目地址 -->
-    <a href="https://github.com/ExamAware/ExamSchedule" target="_blank">
-        <img src="./github-icon.png" alt="GitHub" style="position: absolute; top: 10px; right: 10px; width: 30px; height: 30px;" title="在GitHub上查看源代码">
+    <a href="https://github.com/ExamAware/ExamSchedule" target="_blank" style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
+        <img src="./github-icon.png" alt="GitHub" style="width: 30px; height: 30px;" title="在GitHub上查看源代码">
     </a>
 </body>
 </html>
