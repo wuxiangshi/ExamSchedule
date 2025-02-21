@@ -19,10 +19,9 @@ body::-webkit-scrollbar {
     to { opacity: 1; }
 }
 
-#fullscreen-btn {
+#fullscreen-btn, #settings-btn {
     position: absolute;
     top: 20px;
-    right: 20px;
     padding: 10px 20px;
     font-size: 1rem;
     cursor: pointer;
@@ -33,30 +32,17 @@ body::-webkit-scrollbar {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.3s ease;
     z-index: 1001;
+}
+
+#fullscreen-btn {
+    right: 20px;
 }
 
 #settings-btn {
-    position: absolute;
-    top: 20px;
     right: 120px; /* Fullscreen button's left */
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    background-color: #1f1f1f;
-    color: #e0e0e0;
-    border: 1px solid #333;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    z-index: 1001;
 }
 
-#settings-btn:hover {
-    background-color: #333;
-    transform: scale(1.05);
-}
-
-#fullscreen-btn:hover {
+#settings-btn:hover, #fullscreen-btn:hover {
     background-color: #333;
     transform: scale(1.05);
 }
@@ -66,6 +52,7 @@ body::-webkit-scrollbar {
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
     background-color: rgba(31, 31, 31, 0.5); /* 使用rgba设置背景透明度 */
+    backdrop-filter: blur(10px);
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
@@ -99,22 +86,30 @@ h1 {
 .content {
     display: flex;
     justify-content: space-between;
+    gap: 2px; /* 板块间隔2px */
 }
 
 .left-column, .right-column {
     width: 48%;
-    background-color: rgba(31, 31, 31, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.clock-section, .info-section, .right-column {
+    background-color: rgba(31, 31, 31, 0.5); /* 亚克力效果 */
+    backdrop-filter: blur(10px);
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
 }
 
 #current-time {
-    font-size: 10rem;
-    font-weight: bold;
+    font-size: 6rem;
     text-align: center;
-    margin-bottom: 20px;
     color: #7cc3fb;
+    margin: 0;
+    font-weight: bold;
 }
 
 #current-subject, #exam-timing, #remaining-time, #status {
@@ -207,6 +202,7 @@ td:last-child {
     width: 80%;
     max-width: 600px;
     border-radius: 10px;
+    backdrop-filter: blur(10px);
 }
 
 #settings-modal-content label {
@@ -225,6 +221,12 @@ td:last-child {
     border-radius: 5px;
     background-color: #121212;
     color: #e0e0e0;
+}
+
+#settings-modal-content input:focus {
+    outline: none;
+    border-color: #007acc;
+    box-shadow: 0 0 0 1px #007acc;
 }
 
 #settings-modal-content button {
