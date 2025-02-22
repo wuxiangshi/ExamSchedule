@@ -51,9 +51,7 @@ body::-webkit-scrollbar {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: rgba(0, 0, 0, 0.2); /* 使用rgba设置背景透明度为80% */
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0); /* 使用rgba设置背景透明度为80% */
 }
 
 h1 {
@@ -128,7 +126,7 @@ table {
 
 th, td {
     border: 1px solid #333;
-    padding: 8px; /* 缩短行高 */
+    padding: 2px; /* 缩短行高 */
     font-size: 2rem;
     text-align: center;
 }
