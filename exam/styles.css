@@ -51,8 +51,7 @@ body::-webkit-scrollbar {
     padding: 20px;
     max-width: 1400px; /* 增加主体部分宽度 */
     margin: auto;
-    background-color: rgba(31, 31, 31, 0.5); /* 使用rgba设置背景透明度 */
-    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.2); /* 使用rgba设置背景透明度为80% */
     border-radius: 8px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
@@ -86,14 +85,14 @@ h1 {
 .content {
     display: flex;
     justify-content: space-between;
-    gap: 2px; /* 板块间隔2px */
+    gap: 3px; /* 板块间隔3px */
 }
 
 .left-column, .right-column {
     width: 48%;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 3px; /* 板块间隔3px */
 }
 
 .clock-section, .info-section, .right-column {
@@ -105,7 +104,7 @@ h1 {
 }
 
 #current-time {
-    font-size: 6rem;
+    font-size: 8rem;
     text-align: center;
     color: #7cc3fb;
     margin: 0;
