@@ -192,31 +192,47 @@ td:last-child {
 }
 
 #settings-modal-content {
-    background-color: #1f1f1f;
-    margin: 5% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
+    background: rgba(31, 31, 31, 0.95);
+    padding: 25px;
+    margin: 25px auto;
+    border-radius: 12px;
+    border: 1px solid #444;
+    backdrop-filter: blur(8px);
     max-width: 600px;
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#settings-modal-content h3 {
+    margin: 0 0 20px;
+    color: #e0e0e0;
+    font-size: 20px;
 }
 
 #settings-modal-content label {
-    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 12px 0;
+    font-size: 16px;
+    color: #b0b0b0;
 }
 
 #settings-modal-content input[type="number"],
 #settings-modal-content input[type="text"] {
-    font-size: 2rem;
+    font-size: 1.5rem;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #555;
     border-radius: 5px;
-    background-color: #121212;
+    background-color: #222;
     color: #e0e0e0;
 }
 
@@ -226,20 +242,28 @@ td:last-child {
     box-shadow: 0 0 0 1px #007acc;
 }
 
+.button-group {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 #settings-modal-content button {
-    padding: 10px 20px;
-    font-size: 2rem;
-    cursor: pointer;
-    background-color: #93b4f7;
+    background: linear-gradient(135deg, #3498db, #2980b9);
     color: white;
     border: none;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(52,152,219,0.25);
 }
 
 #settings-modal-content button:hover {
-    background-color: #45a049;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(52,152,219,0.35);
 }
 
 #close-settings-btn {
