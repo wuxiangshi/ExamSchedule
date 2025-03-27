@@ -100,6 +100,10 @@ h1 {
     border-radius: 8px;
 }
 
+.clock-section, .info-section {
+    margin-bottom: 20px; /* 增加时钟和信息板块之间的间隔 */
+}
+
 #current-time {
     font-size: 8rem;
     text-align: center;

@@ -99,6 +99,7 @@ h1 {
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     border-radius: 8px;
+    margin-bottom: 20px; /* 增加时钟和信息板块之间的间隔 */
 }
 
 #current-time {
