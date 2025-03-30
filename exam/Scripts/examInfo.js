@@ -124,26 +124,69 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             examTableBodyElem.innerHTML = "";
+            
+            // 预处理日期和时间段
+            const dateGroups = {};
             data.examInfos.forEach(exam => {
                 const start = new Date(exam.start);
-                const end = new Date(exam.end);
-                let status = "";
-                if (now < start) {
-                    status = "即将开始";
-                } else if (now > end) {
-                    status = "已结束";
-                } else {
-                    status = "进行中";
+                const hour = start.getHours();
+                const dateStr = `${start.getMonth() + 1}月${start.getDate()}日<br>${hour < 12 ? '上午' : (hour < 18 ? '下午' : '晚上')}`;
+                
+                if (!dateGroups[dateStr]) {
+                    dateGroups[dateStr] = [];
                 }
+                dateGroups[dateStr].push(exam);
+            });
 
-                const row = document.createElement("tr");
-                row.className = `exam-status-${status}`;
-                row.innerHTML = `
-                    <td>${exam.name}</td>
-                    <td>${formatTimeWithoutSeconds(new Date(exam.start).toLocaleTimeString('zh-CN', { hour12: false }))}</td>
-                    <td>${formatTimeWithoutSeconds(new Date(exam.end).toLocaleTimeString('zh-CN', { hour12: false }))}</td>
-                `;
-                examTableBodyElem.appendChild(row);
+            // 生成表格
+            Object.entries(dateGroups).forEach(([dateStr, exams]) => {
+                let isFirstRow = true;
+                // 计算实际需要的行数（考虑科目名称中的斜杠）
+                const totalRows = exams.reduce((acc, exam) => {
+                    return acc + (exam.name.includes('/') ? exam.name.split('/').length : 1);
+                }, 0);
+
+                exams.forEach(exam => {
+                    const start = new Date(exam.start);
+                    const end = new Date(exam.end);
+                    const now = new Date(new Date().getTime() + offsetTime * 1000);
+
+                    let status = "未开始";
+                    if (now < start) {
+                        status = now > new Date(start.getTime() - 15 * 60 * 1000) ? "即将开始" : "未开始";
+                    } else if (now > end) {
+                        status = "已结束";
+                    } else {
+                        status = "进行中";
+                    }
+
+                    // 处理包含斜杠的科目名称
+                    const subjects = exam.name.split('/');
+                    subjects.forEach((subject, index) => {
+                        const row = document.createElement("tr");
+                        let cells = '';
+
+                        if (isFirstRow) {
+                            cells = `<td rowspan="${totalRows}">${dateStr}</td>`;
+                            isFirstRow = false;
+                        }
+
+                        // 仅在第一个科目行添加时间和状态
+                        if (index === 0) {
+                            cells += `
+                                <td>${subject.trim()}</td>
+                                <td rowspan="${subjects.length}">${formatTimeWithoutSeconds(start.toLocaleTimeString('zh-CN', { hour12: false }))}</td>
+                                <td rowspan="${subjects.length}">${formatTimeWithoutSeconds(end.toLocaleTimeString('zh-CN', { hour12: false }))}</td>
+                                <td rowspan="${subjects.length}"><span class="exam-status-tag exam-status-${status}">${status}</span></td>
+                            `;
+                        } else {
+                            cells += `<td>${subject.trim()}</td>`;
+                        }
+
+                        row.innerHTML = cells;
+                        examTableBodyElem.appendChild(row);
+                    });
+                });
             });
         } catch (e) {
             errorSystem.show('更新考试信息失败: ' + e.message);
