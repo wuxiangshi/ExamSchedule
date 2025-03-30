@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const zoomInput = document.getElementById("zoom-input");
     const themeToggle = document.getElementById("theme-toggle");
     const themeLink = document.getElementById("theme-link");
+    const configFileInput = document.getElementById("config-file");
+    const clearConfigBtn = document.getElementById("clear-config-btn");
 
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
@@ -77,6 +79,58 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggle.addEventListener("change", () => {
         const theme = themeToggle.checked ? "light" : "dark";
         themeLink.href = theme === "light" ? "Styles/light.css" : "Styles/dark.css";
+    });
+
+    configFileInput.addEventListener("change", (event) => {
+        try {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const config = JSON.parse(e.target.result);
+                    
+                    // 验证配置文件格式
+                    if (!config.examInfos || !Array.isArray(config.examInfos)) {
+                        throw new Error("无效的配置文件格式");
+                    }
+                    
+                    // 验证每个考试信息
+                    config.examInfos.forEach(exam => {
+                        if (!exam.name || !exam.start || !exam.end) {
+                            throw new Error("考试信息不完整");
+                        }
+                        // 验证日期格式
+                        if (isNaN(new Date(exam.start).getTime()) || isNaN(new Date(exam.end).getTime())) {
+                            throw new Error("无效的日期格式");
+                        }
+                    });
+                    
+                    // 保存配置到本地存储
+                    localStorage.setItem('localExamConfig', JSON.stringify(config));
+                    errorSystem.show('配置文件已加载，将在下次启动时生效');
+                    
+                } catch (error) {
+                    errorSystem.show('配置文件格式错误: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        } catch (e) {
+            errorSystem.show('读取文件失败: ' + e.message);
+        }
+    });
+
+    clearConfigBtn.addEventListener("click", () => {
+        try {
+            if (confirm("确定要清除本地配置吗？这将恢复使用默认配置文件。")) {
+                localStorage.removeItem('localExamConfig');
+                configFileInput.value = ''; // 清空文件选择
+                errorSystem.show('本地配置已清除，将在下次启动时生效');
+            }
+        } catch (e) {
+            errorSystem.show('清除配置失败: ' + e.message);
+        }
     });
 
     try {

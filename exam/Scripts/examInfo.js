@@ -11,6 +11,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let offsetTime = getCookie("offsetTime") || 0;
 
     function fetchData() {
+        // 优先使用本地配置
+        const localConfig = localStorage.getItem('localExamConfig');
+        if (localConfig) {
+            try {
+                const data = JSON.parse(localConfig);
+                displayExamInfo(data);
+                updateCurrentTime();
+                updateExamInfo(data);
+                setInterval(() => updateCurrentTime(), 1000);
+                setInterval(() => updateExamInfo(data), 1000);
+                return Promise.resolve();
+            } catch (error) {
+                localStorage.removeItem('localExamConfig');
+                errorSystem.show('本地配置无效，已切换至默认配置');
+            }
+        }
+        
+        // 使用默认配置
         return fetch('exam_config.json', { cache: "no-store" })
             .then(response => response.json())
             .then(data => {

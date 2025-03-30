@@ -415,3 +415,54 @@ input:checked + .slider:before {
     justify-content: space-between;
     gap: 10px;
 }
+
+.config-file-container {
+    margin: 12px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.config-file-container label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.config-file-container input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+}
+
+.config-file-container input[type="file"]:hover {
+    background-color: #f5f5f5;
+}
+
+.file-hint {
+    margin-top: 4px;
+    font-size: 12px;
+    color: #666;
+}
+
+.config-control-btn {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.config-control-btn:hover {
+    background-color: #c9302c;
+}
