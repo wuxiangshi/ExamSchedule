@@ -101,10 +101,9 @@ document.addEventListener("DOMContentLoaded", () => {
                     remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
                     remainingTimeElem.style.color = "#93b4f7";
                     remainingTimeElem.style.fontWeight = "normal";
+                    statusElem.textContent = "状态: 进行中";
+                    statusElem.style.color = "#5ba838";
                 }
-
-                statusElem.textContent = "状态: 进行中";
-                statusElem.style.color = "#5ba838";
             } else if (lastExam && now < new Date(lastExam.end).getTime() + 60000) {
                 const timeSinceEnd = (now.getTime() - new Date(lastExam.end).getTime()) / 1000;
                 currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
