@@ -114,5 +114,20 @@
 
     <!-- 新增版权信息 -->
     <div class="copyright">&copy; 2024-2025 ExamAware开发团队 版权所有</div>
+    
+    <script>
+        // 愚人节彩蛋
+        function checkAprilFools() {
+            const today = new Date();
+            if(today.getMonth() === 3 && today.getDate() === 1) {  // 4月1日
+                if(Math.random() <= 0.75) {  // 75%的概率
+                    window.location.href = 'https://www.bilibili.com/video/BV1GJ411x7h7/';
+                }
+            }
+        }
+        
+        // 页面加载时执行检查
+        window.onload = checkAprilFools;
+    </script>
 </body>
 </html>

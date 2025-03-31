@@ -95,6 +95,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
                     remainingTimeElem.style.color = "red";
                     remainingTimeElem.style.fontWeight = "bold";
+                    statusElem.textContent = "状态: 即将结束";
+                    statusElem.style.color = "red";
                 } else {
                     remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
                     remainingTimeElem.style.color = "#93b4f7";
