@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", () => {
             let currentExam = null;
             let nextExam = null;
             let lastExam = null;
+            let isnotificated = false;
 
             data.examInfos.forEach(exam => {
                 const start = new Date(exam.start);
@@ -79,6 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (now > end && (!lastExam || end > new Date(lastExam.end))) {
                     lastExam = exam;
+                    isnotificated = false;
                 }
             });
 
@@ -97,6 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     remainingTimeElem.style.fontWeight = "bold";
                     statusElem.textContent = "状态: 即将结束";
                     statusElem.style.color = "red";
+                    
+                    // 在剩余15分钟时显示提醒
+                    if (isnotificated === false) {
+                        const overlay = document.getElementById('reminder-overlay');
+                        overlay.classList.add('show');
+                        setTimeout(() => {
+                            overlay.classList.remove('show');
+                        }, 5000);
+                        isnotificated = true;
+                    }
                 } else {
                     remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
                     remainingTimeElem.style.color = "#93b4f7";

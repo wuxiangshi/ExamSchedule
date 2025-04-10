@@ -16,20 +16,17 @@ document.addEventListener("DOMContentLoaded", () => {
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
     let zoomLevel = getCookie("zoomLevel") || 1;
-    let theme = getCookie("theme") || "dark";
     let currentTheme = getCookie("currentTheme") || "md3";
+    let theme = getCookie("theme") || "dark";
     let themeConfig = [];
 
     offsetTime = parseInt(offsetTime);
     roomElem.textContent = room;
 
-    if (theme === "light") {
-        themeLink.href = "Styles/light.css";
-        themeToggle.checked = true;
-    } else {
-        themeLink.href = "Styles/dark.css";
-        themeToggle.checked = false;
-    }
+    // 初始化主题
+    const currentThemePath = `Styles/${currentTheme}/${theme}.css`;
+    themeLink.href = currentThemePath;
+    themeToggle.checked = theme === "light";
 
     // 加载主题配置
     fetch('Styles/profile.json')
@@ -91,7 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
             setCookie("currentTheme", currentTheme, 365);
             roomElem.textContent = room;
             document.body.style.zoom = zoomLevel;
-            themeLink.href = theme === "light" ? "Styles/light.css" : "Styles/dark.css";
+            updateThemeLink();
             settingsModal.classList.add("fade-out");
             setTimeout(() => {
                 settingsModal.style.display = "none";
