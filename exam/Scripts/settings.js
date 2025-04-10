@@ -11,11 +11,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const themeLink = document.getElementById("theme-link");
     const configFileInput = document.getElementById("config-file");
     const clearConfigBtn = document.getElementById("clear-config-btn");
+    const themeSelect = document.getElementById("theme-select");
 
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
     let zoomLevel = getCookie("zoomLevel") || 1;
     let theme = getCookie("theme") || "dark";
+    let currentTheme = getCookie("currentTheme") || "md3";
+    let themeConfig = [];
 
     offsetTime = parseInt(offsetTime);
     roomElem.textContent = room;
@@ -26,6 +29,29 @@ document.addEventListener("DOMContentLoaded", () => {
     } else {
         themeLink.href = "Styles/dark.css";
         themeToggle.checked = false;
+    }
+
+    // 加载主题配置
+    fetch('Styles/profile.json')
+        .then(response => response.json())
+        .then(data => {
+            themeConfig = data.theme;
+            // 填充主题选择下拉框
+            themeConfig.forEach(theme => {
+                const option = document.createElement('option');
+                option.value = theme.path || theme.type;
+                option.textContent = theme.name;
+                themeSelect.appendChild(option);
+            });
+            themeSelect.value = currentTheme;
+            updateThemeLink();
+        })
+        .catch(error => errorSystem.show('加载主题配置失败: ' + error.message));
+
+    function updateThemeLink() {
+        const themePath = currentTheme;
+        const isDark = !themeToggle.checked;
+        themeLink.href = `Styles/${themePath}/${isDark ? 'dark' : 'light'}.css`;
     }
 
     settingsBtn.addEventListener("click", () => {
@@ -57,10 +83,12 @@ document.addEventListener("DOMContentLoaded", () => {
             room = roomInput.value;
             zoomLevel = parseFloat(zoomInput.value);
             theme = themeToggle.checked ? "light" : "dark";
+            currentTheme = themeSelect.value;
             setCookie("offsetTime", offsetTime, 365);
             setCookie("room", room, 365);
             setCookie("zoomLevel", zoomLevel, 365);
             setCookie("theme", theme, 365);
+            setCookie("currentTheme", currentTheme, 365);
             roomElem.textContent = room;
             document.body.style.zoom = zoomLevel;
             themeLink.href = theme === "light" ? "Styles/light.css" : "Styles/dark.css";
@@ -76,9 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    themeSelect.addEventListener("change", () => {
+        currentTheme = themeSelect.value;
+        updateThemeLink();
+    });
+
     themeToggle.addEventListener("change", () => {
-        const theme = themeToggle.checked ? "light" : "dark";
-        themeLink.href = theme === "light" ? "Styles/light.css" : "Styles/dark.css";
+        updateThemeLink();
     });
 
     configFileInput.addEventListener("change", (event) => {
