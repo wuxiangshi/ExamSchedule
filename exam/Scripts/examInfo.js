@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
             let currentExam = null;
             let nextExam = null;
             let lastExam = null;
-            let isnotificated = false;
 
             data.examInfos.forEach(exam => {
                 const start = new Date(exam.start);
@@ -99,15 +98,15 @@ document.addEventListener("DOMContentLoaded", () => {
                     remainingTimeElem.style.fontWeight = "bold";
                     statusElem.textContent = "状态: 即将结束";
                     statusElem.style.color = "red";
-                    
+
                     // 在剩余15分钟时显示提醒
-                    if (isnotificated === false) {
+                    if (isnotificated === false && remainingMinutes === 14 && remainingSeconds === 59) {
+                        isnotificated = true;
                         const overlay = document.getElementById('reminder-overlay');
                         overlay.classList.add('show');
                         setTimeout(() => {
                             overlay.classList.remove('show');
                         }, 5000);
-                        isnotificated = true;
                     }
                 } else {
                     remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;

@@ -42,10 +42,9 @@ body::-webkit-scrollbar {
 
 .container {
     padding: 24px;
-    max-width: 1400px;
+    max-width: 100%;
     margin: auto;
-    background-color: #333333;
-    border-radius: 28px;
+    background-color: #1f1f1f;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
@@ -94,9 +93,9 @@ h1 {
 }
 
 .clock-section, .info-section, .right-column {
-    background-color: #404040;
+    background-color: #292929;
     padding: 24px;
-    border-radius: 28px;
+    border-radius: 14px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
@@ -120,8 +119,8 @@ table {
     border-collapse: separate;
     border-spacing: 0;
     margin-top: 24px;
-    background-color: #4A4A4A;
-    border-radius: 16px;
+    background-color: #292929;
+    border-radius: 14px;
     overflow: hidden;
 }
 
@@ -145,7 +144,7 @@ tr:hover {
 .exam-status-tag {
     padding: 6px 12px;
     border-radius: 8px;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
 }
 
