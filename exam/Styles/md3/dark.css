@@ -181,15 +181,15 @@ tr:hover {
 }
 
 .exam-status-tag {
-    padding: 6px 12px;
-    border-radius: 8px;
+    padding: 2px 4px;
+    border-radius: 3px;
     font-size: 1.2rem;
     font-weight: 500;
 }
 
 .exam-status-进行中 {
-    background-color: #365534;
-    color: #90D480;
+    background-color: #263227;
+    color: green;
 }
 
 .exam-status-即将开始 {
@@ -198,13 +198,13 @@ tr:hover {
 }
 
 .exam-status-已结束 {
-    background-color: #5C1130;
-    color: #FFB3B3;
+    background-color: #3a2523;
+    color: red;
 }
 
 .exam-status-未开始 {
-    background-color: #4A4458;
-    color: #E6E1E5;
+    background-color: #3c2f1d;
+    color: orange;
 }
 
 #settings-modal {
