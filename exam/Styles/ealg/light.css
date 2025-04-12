@@ -46,6 +46,8 @@ body::-webkit-scrollbar {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     transition: all 0.2s ease;
     z-index: 1001;
+    display: flex;
+    align-items: center;
 }
 
 #fullscreen-btn {
@@ -53,13 +55,27 @@ body::-webkit-scrollbar {
 }
 
 #settings-btn {
-    right: 120px;
+    right: 140px;
 }
 
 #settings-btn:hover, #fullscreen-btn:hover {
     background-color: #D0BCFF;
     transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#settings-btn::before {
+    content: "settings";
+    font-family: 'Material Icons';
+    font-size: 20px;
+    margin-right: 4px;
+}
+
+#fullscreen-btn::before {
+    content: "fullscreen";
+    font-family: 'Material Icons';
+    font-size: 20px;
+    margin-right: 4px;
 }
 
 .container {
@@ -273,6 +289,10 @@ tr:hover {
     justify-content: flex-end;
     gap: 16px;
     margin-top: 32px;
+    position: relative;
+    background-color: #FFFFFF;
+    padding: 16px 0;
+    border-top: 1px solid #E8DEF8;
 }
 
 #save-settings-btn, #close-settings-btn {
@@ -283,6 +303,9 @@ tr:hover {
     border: none;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 #save-settings-btn {
@@ -298,6 +321,16 @@ tr:hover {
 #save-settings-btn:hover, #close-settings-btn:hover {
     transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+#save-settings-btn::before {
+    content: "✓";
+    font-size: 18px;
+}
+
+#close-settings-btn::before {
+    content: "✕";
+    font-size: 18px;
 }
 
 .error-container {
