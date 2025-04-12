@@ -39,7 +39,7 @@
 		<div class="text">当前时间：</div>
 		<div class="time" id="time"></div>
 		<div class="controls">
-			<select id="fontSelector" class="btn">
+			<select id="fontSelector" class="btn" onchange="changeFontFamily()">
 				<option value="Roboto">Roboto（在线）</option>
 				<option value="DM Sans">DM Sans（在线）</option>
 				<option value="Inter">Inter（在线）</option>
@@ -50,7 +50,10 @@
 				<option value="黑体">黑体</option>
 				<option value="宋体">宋体</option>
 			</select>
-			<button class="btn" onclick="changeFontFamily()">更改字体</button>
+			<div class="font-size-control">
+				<input type="number" id="fontSizeInput" class="btn" value="160" min="10" max="500" step="5">
+				<span class="unit">px</span>
+			</div>
 			<button class="btn" onclick="changeFontSize(-5)">减小字号</button>
 			<button class="btn" onclick="changeFontSize(5)">增大字号</button>
 			<button class="btn fullscreen" onclick="toggleFullScreen()">全屏/还原</button>
@@ -73,9 +76,17 @@
 
 		function changeFontSize(change) {
 			const elements = document.querySelectorAll('.time');
+			const input = document.getElementById('fontSizeInput');
 			elements.forEach(element => {
-				const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
-				element.style.fontSize = `${currentSize + change}px`;
+				let newSize;
+				if (typeof change === 'number') {
+					const currentSize = parseFloat(window.getComputedStyle(element).fontSize);
+					newSize = currentSize + change;
+					input.value = newSize;
+				} else {
+					newSize = parseInt(input.value);
+				}
+				element.style.fontSize = `${newSize}px`;
 			});
 		}
 
@@ -96,6 +107,12 @@
 				}
 			}
 		}
+
+		// 监听字号输入框变化
+		document.getElementById('fontSizeInput').addEventListener('input', () => changeFontSize());
+		
+		// 初始化默认字号
+		window.addEventListener('load', () => changeFontSize());
 	</script>
 </body>
 

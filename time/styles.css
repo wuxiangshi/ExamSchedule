@@ -21,7 +21,7 @@ body {
 }
 
 .time {
-    font-size: 10rem;
+    font-size: 160px;  /* 更新默认字号 */
     margin: 0;
     color: #D0BCFF;
     font-weight: 400;
@@ -109,4 +109,21 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.font-size-control {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+#fontSizeInput {
+    width: 70px;
+    text-align: center;
+    padding: 12px 8px;
+}
+
+.unit {
+    color: #E6E1E5;
+    font-size: 0.9rem;
 }
