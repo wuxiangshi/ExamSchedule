@@ -6,9 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>选择页面</title>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            background: #1C1B1F;
+            background: #2C2B30;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -47,7 +48,9 @@
             border-radius: 100px;
             background-color: #49454F;
             transition: all 0.3s ease;
-            display: inline-block;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         a:hover {
@@ -97,14 +100,30 @@
             height: 24px;
             filter: invert(1);
         }
+
+        .project-title {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            font-weight: 500;
+            color: #E6E1E5;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        .material-icons {
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
+    <div class="project-title">ExamSchedule</div>
     <h1>选择版本：</h1>
     <ul>
-        <li><a href="./time/">电子钟表</a></li>
-        <li><a href="./exam/">考试看板</a></li>
-        <li><a href="./notification/">考试广播</a></li>
+        <li><a href="./time/"><span class="material-icons">schedule</span>电子钟表</a></li>
+        <li><a href="./exam/"><span class="material-icons">dashboard</span>考试看板</a></li>
+        <li><a href="./notification/"><span class="material-icons">campaign</span>考试广播</a></li>
     </ul>
 
     <!-- 添加GitHub图标跳转项目地址 -->
