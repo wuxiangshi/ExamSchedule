@@ -5,9 +5,9 @@
     padding: 12px 24px; /* 内边距 */
     font-size: 1rem; /* 字体大小 */
     cursor: pointer; /* 鼠标悬停时显示为手型 */
-    background-color: #2b2b2b; /* 按钮背景颜色 */
-    color: #ffffff; /* 按钮文字颜色 */
-    border: 1px solid #444444; /* 按钮边框样式 */
+    background-color: #404040; /* 修改为统一的灰色背景 */
+    color: #E6E1E5; /* 按钮文字颜色 */
+    border: none; /* 按钮边框样式 */
     border-radius: 20px; /* 按钮圆角大小 */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* 按钮阴影 */
     transition: all 0.2s ease; /* 背景颜色和缩放的过渡效果 */
@@ -15,7 +15,7 @@
 }
 
 #return-btn:hover {
-    background-color: #3c3c3c; /* 悬停时的背景颜色 */
+    background-color: #4A4A4A; /* 统一的灰色悬停背景 */
     transform: translateY(-1px); /* 悬停时向上移动 1px */
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4); /* 悬停时的阴影效果 */
 }
@@ -39,7 +39,7 @@ body::-webkit-scrollbar {
     padding: 12px 24px;
     font-size: 1rem;
     cursor: pointer;
-    background-color: #4A4458;
+    background-color: #404040;
     color: #E6E1E5;
     border: none;
     border-radius: 20px;
@@ -73,7 +73,7 @@ body::-webkit-scrollbar {
 }
 
 #settings-btn:hover, #fullscreen-btn:hover {
-    background-color: #635B70;
+    background-color: #4A4A4A;
     transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
@@ -309,8 +309,8 @@ tr:hover {
 }
 
 #save-settings-btn {
-    background-color: #D0BCFF;
-    color: #1C1B1F;
+    background-color: #404040;
+    color: #E6E1E5;
 }
 
 #save-settings-btn::before {
@@ -319,7 +319,7 @@ tr:hover {
 }
 
 #close-settings-btn {
-    background-color: #4A4458;
+    background-color: #404040;
     color: #E6E1E5;
 }
 
@@ -329,6 +329,7 @@ tr:hover {
 }
 
 #save-settings-btn:hover, #close-settings-btn:hover {
+    background-color: #4A4A4A;
     transform: translateY(-1px);
     box-shadow: 0 2px 6px rgba(0,0,0,0.4);
 }
@@ -418,7 +419,7 @@ input:checked + .slider:before {
 .config-file-container input[type="file"]::-webkit-file-upload-button {
     padding: 8px 16px;
     margin-right: 12px;
-    background-color: #4A4458;
+    background-color: #404040;
     color: #E6E1E5;
     border: none;
     border-radius: 12px;
@@ -427,7 +428,7 @@ input:checked + .slider:before {
 }
 
 .config-file-container input[type="file"]::-webkit-file-upload-button:hover {
-    background-color: #635B70;
+    background-color: #4A4A4A;
 }
 
 .file-hint {
@@ -440,7 +441,7 @@ input:checked + .slider:before {
 .config-control-btn {
     margin-top: 20px;
     padding: 12px 28px;
-    background-color: #4A4458;
+    background-color: #404040;
     color: #E6E1E5;
     border: none;
     border-radius: 24px;
@@ -454,7 +455,7 @@ input:checked + .slider:before {
 }
 
 .config-control-btn:hover {
-    background-color: #635B70;
+    background-color: #4A4A4A;
     transform: translateY(-1px);
     box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
