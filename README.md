@@ -54,7 +54,7 @@
 
 ## 如何部署？
 
- 您可以点击查看 [ExamShowboard网页端部署教程文档](https://docs.examaware.tech/web/web-deploy.html)了解详细的部署教程。
+ 您可以点击查看 [部署教程](https://docs.examaware.tech/app/web/web-deploy.html)了解详细的部署教程。
 
 > [!WARNING]
 >
