@@ -2,7 +2,7 @@ body {
     font-family: 'Roboto', 'HarmonyOS Sans SC', sans-serif;
     margin: 0;
     padding: 0;
-    background: #1C1B1F;
+    background: #121212;
     color: #E6E1E5;
     overflow: auto;
 }
@@ -42,9 +42,9 @@ body::-webkit-scrollbar {
 
 .container {
     padding: 24px;
-    max-width: 100%;
+    max-width: 90%;
     margin: auto;
-    background-color: #1f1f1f;
+    background-color: #121212;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
@@ -68,7 +68,7 @@ h1 {
 
 #message {
     font-size: 1.5rem;
-    color: #D0BCFF;
+    color: #aaaaaa;
     margin-bottom: 24px;
 }
 
@@ -85,7 +85,7 @@ h1 {
 }
 
 .left-column {
-    width: 45%;
+    width: 50%;
 }
 
 .right-column {
@@ -93,7 +93,7 @@ h1 {
 }
 
 .clock-section, .info-section, .right-column {
-    background-color: #292929;
+    background-color: #212121;
     padding: 24px;
     border-radius: 14px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
@@ -119,14 +119,14 @@ table {
     border-collapse: separate;
     border-spacing: 0;
     margin-top: 24px;
-    background-color: #292929;
+    background-color: #212121;
     border-radius: 14px;
     overflow: hidden;
 }
 
 th, td {
-    padding: 1px;
-    font-size: 1.8rem;
+    padding: 3px;
+    font-size: 1.5rem;
     text-align: center;
     border-bottom: 1px solid #555555;
 }
@@ -142,15 +142,15 @@ tr:hover {
 }
 
 .exam-status-tag {
-    padding: 6px 12px;
+    padding: 2px 4px;
     border-radius: 8px;
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 500;
 }
 
 .exam-status-进行中 {
-    background-color: #365534;
-    color: #90D480;
+    background-color: #263227;
+    color: green;
 }
 
 .exam-status-即将开始 {
@@ -159,13 +159,13 @@ tr:hover {
 }
 
 .exam-status-已结束 {
-    background-color: #5C1130;
-    color: #FFB3B3;
+    background-color: #3a2523;
+    color: red;
 }
 
 .exam-status-未开始 {
-    background-color: #4A4458;
-    color: #E6E1E5;
+    background-color: #3c2f1d;
+    color: orange;
 }
 
 #settings-modal {
@@ -485,7 +485,7 @@ input:checked + .slider:before {
 
 .reminder-title {
     font-size: 5rem;
-    color: #FF453A;
+    color: white;
     margin-bottom: 2rem;
 }
 
