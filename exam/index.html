@@ -27,7 +27,60 @@
                     <div id="current-time"></div>
                 </div>
                 <div class="info-section">
+                    <button id="info-toggle-btn" class="info-toggle-btn" title="切换显示模式">
+                        <span class="material-icons">swap_horiz</span>
+                    </button>
                     <div id="current-subject"></div>
+                    <div id="paper-info" style="display: none;">
+                        <div class="paper-count-container">
+                            <div class="paper-input-group">
+                                <label>试卷:</label>
+                                <div class="count-control">
+                                    <button class="count-btn" data-target="paper-count" data-action="decrease">
+                                        <span class="material-icons">remove</span>
+                                    </button>
+                                    <input type="number" id="paper-count" min="0" value="0">
+                                    <button class="count-btn" data-target="paper-count" data-action="increase">
+                                        <span class="material-icons">add</span>
+                                    </button>
+                                </div>
+                                <span>张</span>
+                                <div class="count-control">
+                                    <button class="count-btn" data-target="paper-pages" data-action="decrease">
+                                        <span class="material-icons">remove</span>
+                                    </button>
+                                    <input type="number" id="paper-pages" min="0" value="0">
+                                    <button class="count-btn" data-target="paper-pages" data-action="increase">
+                                        <span class="material-icons">add</span>
+                                    </button>
+                                </div>
+                                <span>页</span>
+                            </div>
+                            <div class="paper-input-group">
+                                <label>答题卡:</label>
+                                <div class="count-control">
+                                    <button class="count-btn" data-target="sheet-count" data-action="decrease">
+                                        <span class="material-icons">remove</span>
+                                    </button>
+                                    <input type="number" id="sheet-count" min="0" value="0">
+                                    <button class="count-btn" data-target="sheet-count" data-action="increase">
+                                        <span class="material-icons">add</span>
+                                    </button>
+                                </div>
+                                <span>张</span>
+                                <div class="count-control">
+                                    <button class="count-btn" data-target="sheet-pages" data-action="decrease">
+                                        <span class="material-icons">remove</span>
+                                    </button>
+                                    <input type="number" id="sheet-pages" min="0" value="0">
+                                    <button class="count-btn" data-target="sheet-pages" data-action="increase">
+                                        <span class="material-icons">add</span>
+                                    </button>
+                                </div>
+                                <span>页</span>
+                            </div>
+                        </div>
+                    </div>
                     <div id="exam-timing"></div>
                     <div id="remaining-time"></div>
                     <div id="status"></div>

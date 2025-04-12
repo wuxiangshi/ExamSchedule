@@ -96,7 +96,7 @@ h1 {
 }
 
 #message {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     color: #16a3d1;
     margin-bottom: 20px;
 }
@@ -303,7 +303,7 @@ td:last-child {
 #settings-modal-content input[type="text"] {
     flex-grow: 1;
     margin-left: 10px;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -584,4 +584,87 @@ input:checked + .slider:before {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.info-section {
+    position: relative;
+}
+
+.info-toggle-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.info-toggle-btn:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+.info-toggle-btn .material-icons {
+    font-size: 24px;
+}
+
+.paper-count-container {
+    margin: 20px 0;
+}
+
+.paper-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 2.5rem;
+}
+
+.count-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.count-control input {
+    width: 60px;
+    padding: 5px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    border: 2px solid #333;
+    border-radius: 8px;
+}
+
+.count-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #1f1f1f;
+    color: #e0e0e0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.count-btn:hover {
+    background-color: #333;
+    transform: translateY(-1px);
+}
+
+.count-btn .material-icons {
+    font-size: 20px;
 }

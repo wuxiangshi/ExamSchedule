@@ -95,7 +95,7 @@ h1 {
 }
 
 #message {
-    font-size: 1.5rem; /* 字体大小 */
+    font-size: 1.8rem; /* 字体大小 */
     color: #16a3d1; /* 文字颜色 */
     margin-bottom: 20px; /* 下边距 */
 }
@@ -311,7 +311,7 @@ td:last-child {
 
 #settings-modal-content input[type="number"],
 #settings-modal-content input[type="text"] {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     padding: 10px;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -592,4 +592,87 @@ theme-toggle-container {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.info-section {
+    position: relative;
+}
+
+.info-toggle-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    z-index: 2;
+}
+
+.info-toggle-btn:hover {
+    background-color: #ccc;
+    transform: translateY(-1px);
+}
+
+.info-toggle-btn .material-icons {
+    font-size: 24px;
+}
+
+.paper-count-container {
+    margin: 20px 0;
+}
+
+.paper-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+    font-size: 2.5rem;
+}
+
+.count-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.count-control input {
+    width: 60px;
+    padding: 5px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+}
+
+.count-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.count-btn:hover {
+    background-color: #ccc;
+    transform: translateY(-1px);
+}
+
+.count-btn .material-icons {
+    font-size: 20px;
 }

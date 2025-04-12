@@ -8,7 +8,25 @@ document.addEventListener("DOMContentLoaded", () => {
     const statusElem = document.getElementById("status");
     const examTableBodyElem = document.getElementById("exam-table-body");
     const roomElem = document.getElementById("room");
+    const infoToggleBtn = document.getElementById("info-toggle-btn");
+    const paperInfoElem = document.getElementById("paper-info");
+    const examPapersElem = document.getElementById("exam-papers");
+    const answerSheetsElem = document.getElementById("answer-sheets");
     let offsetTime = getCookie("offsetTime") || 0;
+    let showPaperInfo = getCookie("showPaperInfo") === "true";
+
+    // 初始化显示状态
+    if (showPaperInfo) {
+        currentSubjectElem.style.display = "none";
+        paperInfoElem.style.display = "block";
+    }
+
+    infoToggleBtn.addEventListener("click", () => {
+        showPaperInfo = !showPaperInfo;
+        setCookie("showPaperInfo", showPaperInfo, 365);
+        currentSubjectElem.style.display = showPaperInfo ? "none" : "block";
+        paperInfoElem.style.display = showPaperInfo ? "block" : "none";
+    });
 
     function fetchData() {
         // 优先使用本地配置
@@ -83,9 +101,40 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
 
+            // 清空原有内容
+            if (paperInfoElem) paperInfoElem.style.display = showPaperInfo ? "block" : "none";
+            if (currentSubjectElem) currentSubjectElem.style.display = showPaperInfo ? "none" : "block";
+
             if (currentExam) {
-                currentSubjectElem.textContent = `当前科目: ${currentExam.name}`;
-                examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(currentExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(currentExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
+                if (showPaperInfo) {
+                    // 加载本地保存的页数信息
+                    const paperCount = document.getElementById('paper-count');
+                    const paperPages = document.getElementById('paper-pages');
+                    const sheetCount = document.getElementById('sheet-count');
+                    const sheetPages = document.getElementById('sheet-pages');
+                    
+                    if (paperCount && paperPages && sheetCount && sheetPages) {
+                        try {
+                            const savedInfo = localStorage.getItem('paperInfo');
+                            if (savedInfo) {
+                                const info = JSON.parse(savedInfo);
+                                paperCount.value = info.paperCount || 0;
+                                paperPages.value = info.paperPages || 0;
+                                sheetCount.value = info.sheetCount || 0;
+                                sheetPages.value = info.sheetPages || 0;
+                            }
+                        } catch (e) {
+                            console.error('加载页数信息失败:', e);
+                        }
+                    }
+                } else if (currentSubjectElem) {
+                    currentSubjectElem.textContent = `当前科目: ${currentExam.name}`;
+                }
+
+                if (examTimingElem) {
+                    examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(currentExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(currentExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
+                }
+
                 const remainingTime = (new Date(currentExam.end).getTime() - now.getTime() + 1000) / 1000;
                 const remainingHours = Math.floor(remainingTime / 3600);
                 const remainingMinutes = Math.floor((remainingTime % 3600) / 60);
@@ -93,35 +142,46 @@ document.addEventListener("DOMContentLoaded", () => {
                 const remainingTimeText = `${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
 
                 if (remainingHours === 0 && remainingMinutes <= 14) {
-                    remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
-                    remainingTimeElem.style.color = "red";
-                    remainingTimeElem.style.fontWeight = "bold";
-                    statusElem.textContent = "状态: 即将结束";
-                    statusElem.style.color = "red";
+                    if (remainingTimeElem) {
+                        remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
+                        remainingTimeElem.style.color = "red";
+                        remainingTimeElem.style.fontWeight = "bold";
+                    }
+                    if (statusElem) {
+                        statusElem.textContent = "状态: 即将结束";
+                        statusElem.style.color = "red";
+                    }
 
                     // 在剩余15分钟时显示提醒
                     if (isnotificated === false && remainingMinutes === 14 && remainingSeconds === 59) {
                         isnotificated = true;
                         const overlay = document.getElementById('reminder-overlay');
-                        overlay.classList.add('show');
-                        setTimeout(() => {
-                            overlay.classList.remove('show');
-                        }, 5000);
+                        if (overlay) {
+                            overlay.classList.add('show');
+                            setTimeout(() => {
+                                overlay.classList.remove('show');
+                            }, 5000);
+                        }
                     }
                 } else {
-                    remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
-                    remainingTimeElem.style.color = "#93b4f7";
-                    remainingTimeElem.style.fontWeight = "normal";
-                    statusElem.textContent = "状态: 进行中";
-                    statusElem.style.color = "#5ba838";
+                    if (remainingTimeElem) {
+                        remainingTimeElem.textContent = `剩余时间: ${remainingTimeText}`;
+                        remainingTimeElem.style.color = "#93b4f7";
+                        remainingTimeElem.style.fontWeight = "normal";
+                    }
+                    if (statusElem) {
+                        statusElem.textContent = "状态: 进行中";
+                        statusElem.style.color = "#5ba838";
+                    }
                 }
             } else if (lastExam && now < new Date(lastExam.end).getTime() + 60000) {
-                const timeSinceEnd = (now.getTime() - new Date(lastExam.end).getTime()) / 1000;
-                currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
-                examTimingElem.textContent = "";
-                remainingTimeElem.textContent = ``;
-                statusElem.textContent = "状态: 已结束";
-                statusElem.style.color = "red";
+                if (currentSubjectElem) currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
+                if (examTimingElem) examTimingElem.textContent = "";
+                if (remainingTimeElem) remainingTimeElem.textContent = "";
+                if (statusElem) {
+                    statusElem.textContent = "状态: 已结束";
+                    statusElem.style.color = "red";
+                }
             } else if (nextExam) {
                 const timeUntilStart = ((new Date(nextExam.start).getTime() - now.getTime()) / 1000) + 1;
                 const remainingHours = Math.floor(timeUntilStart / 3600);
@@ -146,11 +206,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
             } else {
-                currentSubjectElem.textContent = "考试均已结束";
-                examTimingElem.textContent = "";
-                remainingTimeElem.textContent = "";
-                statusElem.textContent = "状态: 空闲";
-                statusElem.style.color = "#3946AF";
+                if (currentSubjectElem) currentSubjectElem.textContent = "考试均已结束";
+                if (examTimingElem) examTimingElem.textContent = "";
+                if (remainingTimeElem) remainingTimeElem.textContent = "";
+                if (statusElem) {
+                    statusElem.textContent = "状态: 空闲";
+                    statusElem.style.color = "#3946AF";
+                }
             }
 
             examTableBodyElem.innerHTML = "";
@@ -219,9 +281,66 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             });
         } catch (e) {
+            console.error('更新考试信息失败:', e);
             errorSystem.show('更新考试信息失败: ' + e.message);
         }
     }
+
+    // 添加页数控制处理
+    document.querySelectorAll('.count-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = document.getElementById(btn.dataset.target);
+            const action = btn.dataset.action;
+            const currentValue = parseInt(target.value) || 0;
+            
+            if (action === 'increase') {
+                target.value = currentValue + 1;
+            } else if (action === 'decrease' && currentValue > 0) {
+                target.value = currentValue - 1;
+            }
+            
+            // 保存到localStorage
+            updatePaperInfo();
+        });
+    });
+
+    // 监听输入框直接输入
+    ['paper-count', 'paper-pages', 'sheet-count', 'sheet-pages'].forEach(id => {
+        const input = document.getElementById(id);
+        input.addEventListener('change', () => {
+            const value = parseInt(input.value) || 0;
+            input.value = Math.max(0, value); // 确保不小于0
+            updatePaperInfo();
+        });
+    });
+
+    function updatePaperInfo() {
+        const paperInfo = {
+            paperCount: parseInt(document.getElementById('paper-count').value) || 0,
+            paperPages: parseInt(document.getElementById('paper-pages').value) || 0,
+            sheetCount: parseInt(document.getElementById('sheet-count').value) || 0,
+            sheetPages: parseInt(document.getElementById('sheet-pages').value) || 0
+        };
+        localStorage.setItem('paperInfo', JSON.stringify(paperInfo));
+    }
+
+    // 初始化加载保存的页数信息
+    function loadPaperInfo() {
+        try {
+            const savedInfo = localStorage.getItem('paperInfo');
+            if (savedInfo) {
+                const info = JSON.parse(savedInfo);
+                document.getElementById('paper-count').value = info.paperCount || 0;
+                document.getElementById('paper-pages').value = info.paperPages || 0;
+                document.getElementById('sheet-count').value = info.sheetCount || 0;
+                document.getElementById('sheet-pages').value = info.sheetPages || 0;
+            }
+        } catch (e) {
+            console.error('加载页数信息失败:', e);
+        }
+    }
+
+    loadPaperInfo();
 
     fetchData();
 });
