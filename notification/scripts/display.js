@@ -31,13 +31,16 @@ function updateDisplay() {
 
 function formatTime(ms) {
     try {
-        if (ms < 0) return '00:00';
+        if (ms < 0) return '00:00:00';
         var totalSeconds = Math.floor(ms / 1000),
-            minutes = Math.floor(totalSeconds / 60),
+            hours = Math.floor(totalSeconds / 3600),
+            minutes = Math.floor((totalSeconds % 3600) / 60),
             seconds = totalSeconds % 60;
-        return (minutes < 10 ? '0' : '') + minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        return (hours < 10 ? '0' : '') + hours + ':' +
+               (minutes < 10 ? '0' : '') + minutes + ':' +
+               (seconds < 10 ? '0' : '') + seconds;
     } catch (e) {
-        return '--:--';
+        return '--:--:--';
     }
 }
 
