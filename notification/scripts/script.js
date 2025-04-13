@@ -199,4 +199,21 @@ function init() {
 window.onbeforeunload = function () {
     if (timer) clearTimeout(timer);
 };
+
+function goBack() {
+    window.history.back(); // 返回上一页
+}
+
+// 监听主题切换
+document.getElementById('theme-toggle').addEventListener('change', function () {
+    const body = document.body;
+    if (this.checked) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+    } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+    }
+});
+
 init();
