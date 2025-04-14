@@ -81,12 +81,7 @@
         }
 
         .github-link {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            background-color: transparent;
-            padding: 8px;
-            border-radius: 50%;
+            position: static;
         }
 
         .github-link:hover {
@@ -115,6 +110,32 @@
         .material-icons {
             font-size: 20px;
         }
+
+        .top-right-links {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+
+        .about-link {
+            background-color: transparent;
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 14px;
+        }
+
+        .about-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: none;
+            box-shadow: none;
+        }
+
+        .about-link .material-icons {
+            font-size: 18px;
+        }
     </style>
 </head>
 <body>
@@ -126,10 +147,16 @@
         <li><a href="./notification/"><span class="material-icons">campaign</span>考试广播</a></li>
     </ul>
 
-    <!-- 添加GitHub图标跳转项目地址 -->
-    <a href="https://github.com/ExamAware/ExamSchedule" target="_blank" class="github-link">
-        <img src="./github-icon.png" alt="GitHub" title="在GitHub上查看源代码">
-    </a>
+    <!-- 添加关于链接和GitHub图标 -->
+    <div class="top-right-links">
+        <a href="./about/" class="about-link">
+            <span class="material-icons">info</span>
+            关于
+        </a>
+        <a href="https://github.com/ExamAware/ExamSchedule" target="_blank" class="github-link">
+            <img src="./github-icon.png" alt="GitHub" title="在GitHub上查看源代码">
+        </a>
+    </div>
 
     <!-- 新增版权信息 -->
     <div class="copyright">&copy; 2024-2025 ExamAware开发团队 版权所有</div>
