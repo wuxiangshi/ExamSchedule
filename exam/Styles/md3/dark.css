@@ -611,6 +611,13 @@ input:checked + .slider:before {
     font-size: 2.5rem;
 }
 
+.count-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 8px;
+}
+
 .count-control {
     display: flex;
     align-items: center;
@@ -626,6 +633,19 @@ input:checked + .slider:before {
     color: #E6E1E5;
     border: 2px solid #4A4458;
     border-radius: 8px;
+}
+
+.count-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.count-btn .material-icons {
+    font-size: 16px;
 }
 
 .count-btn {

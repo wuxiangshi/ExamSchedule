@@ -12,16 +12,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const configFileInput = document.getElementById("config-file");
     const clearConfigBtn = document.getElementById("clear-config-btn");
     const themeSelect = document.getElementById("theme-select");
+    const autoToggle = document.getElementById("auto-toggle");
 
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
     let zoomLevel = getCookie("zoomLevel") || 1;
     let currentTheme = getCookie("currentTheme") || "md3";
     let theme = getCookie("theme") || "dark";
+    let isAutoToggle = getCookie("autoToggle") || false;
     let themeConfig = [];
 
     offsetTime = parseInt(offsetTime);
     roomElem.textContent = room;
+    autoToggle.checked = isAutoToggle === "true";
 
     // 初始化主题
     const currentThemePath = `Styles/${currentTheme}/${theme}.css`;
@@ -81,11 +84,13 @@ document.addEventListener("DOMContentLoaded", () => {
             zoomLevel = parseFloat(zoomInput.value);
             theme = themeToggle.checked ? "light" : "dark";
             currentTheme = themeSelect.value;
+            isAutoToggle = autoToggle.checked;
             setCookie("offsetTime", offsetTime, 365);
             setCookie("room", room, 365);
             setCookie("zoomLevel", zoomLevel, 365);
             setCookie("theme", theme, 365);
             setCookie("currentTheme", currentTheme, 365);
+            setCookie("autoToggle", isAutoToggle, 365);
             roomElem.textContent = room;
             document.body.style.zoom = zoomLevel;
             updateThemeLink();

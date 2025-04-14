@@ -36,46 +36,54 @@
                             <div class="paper-input-group">
                                 <label>试卷:</label>
                                 <div class="count-control">
-                                    <button class="count-btn" data-target="paper-count" data-action="decrease">
-                                        <span class="material-icons">remove</span>
-                                    </button>
+                                    <div class="count-btn-group">
+                                        <button class="count-btn" data-target="paper-count" data-action="decrease">
+                                            <span class="material-icons">remove</span>
+                                        </button>
+                                        <button class="count-btn" data-target="paper-count" data-action="increase">
+                                            <span class="material-icons">add</span>
+                                        </button>
+                                    </div>
                                     <input type="number" id="paper-count" min="0" value="0">
-                                    <button class="count-btn" data-target="paper-count" data-action="increase">
-                                        <span class="material-icons">add</span>
-                                    </button>
                                 </div>
                                 <span>张</span>
                                 <div class="count-control">
-                                    <button class="count-btn" data-target="paper-pages" data-action="decrease">
-                                        <span class="material-icons">remove</span>
-                                    </button>
+                                    <div class="count-btn-group">
+                                        <button class="count-btn" data-target="paper-pages" data-action="decrease">
+                                            <span class="material-icons">remove</span>
+                                        </button>
+                                        <button class="count-btn" data-target="paper-pages" data-action="increase">
+                                            <span class="material-icons">add</span>
+                                        </button>
+                                    </div>
                                     <input type="number" id="paper-pages" min="0" value="0">
-                                    <button class="count-btn" data-target="paper-pages" data-action="increase">
-                                        <span class="material-icons">add</span>
-                                    </button>
                                 </div>
                                 <span>页</span>
                             </div>
                             <div class="paper-input-group">
                                 <label>答题卡:</label>
                                 <div class="count-control">
-                                    <button class="count-btn" data-target="sheet-count" data-action="decrease">
-                                        <span class="material-icons">remove</span>
-                                    </button>
+                                    <div class="count-btn-group">
+                                        <button class="count-btn" data-target="sheet-count" data-action="decrease">
+                                            <span class="material-icons">remove</span>
+                                        </button>
+                                        <button class="count-btn" data-target="sheet-count" data-action="increase">
+                                            <span class="material-icons">add</span>
+                                        </button>
+                                    </div>
                                     <input type="number" id="sheet-count" min="0" value="0">
-                                    <button class="count-btn" data-target="sheet-count" data-action="increase">
-                                        <span class="material-icons">add</span>
-                                    </button>
                                 </div>
                                 <span>张</span>
                                 <div class="count-control">
-                                    <button class="count-btn" data-target="sheet-pages" data-action="decrease">
-                                        <span class="material-icons">remove</span>
-                                    </button>
+                                    <div class="count-btn-group">
+                                        <button class="count-btn" data-target="sheet-pages" data-action="decrease">
+                                            <span class="material-icons">remove</span>
+                                        </button>
+                                        <button class="count-btn" data-target="sheet-pages" data-action="increase">
+                                            <span class="material-icons">add</span>
+                                        </button>
+                                    </div>
                                     <input type="number" id="sheet-pages" min="0" value="0">
-                                    <button class="count-btn" data-target="sheet-pages" data-action="increase">
-                                        <span class="material-icons">add</span>
-                                    </button>
                                 </div>
                                 <span>页</span>
                             </div>
@@ -134,6 +142,11 @@
                 <label for="theme-toggle">亮/暗色模式:</label>
                 <label class="switch">
                     <input type="checkbox" id="theme-toggle">
+                    <span class="slider round"></span>
+                </label>
+                <label for="auto-toggle">自动切换显示:</label>
+                <label class="switch">
+                    <input type="checkbox" id="auto-toggle">
                     <span class="slider round"></span>
                 </label>
             </div>

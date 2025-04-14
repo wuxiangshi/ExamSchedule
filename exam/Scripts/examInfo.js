@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const answerSheetsElem = document.getElementById("answer-sheets");
     let offsetTime = getCookie("offsetTime") || 0;
     let showPaperInfo = getCookie("showPaperInfo") === "true";
+    let autoToggle = getCookie("autoToggle") === "true";
 
     // 初始化显示状态
     if (showPaperInfo) {
@@ -21,11 +22,22 @@ document.addEventListener("DOMContentLoaded", () => {
         paperInfoElem.style.display = "block";
     }
 
+    // 更新显示内容
+    function updateDisplay(isExamTime) {
+        if (autoToggle) {
+            // 在考试期间显示页数，其他时间显示表格
+            paperInfoElem.style.display = isExamTime ? "block" : "none";
+            currentSubjectElem.style.display = "block";
+        }
+    }
+
     infoToggleBtn.addEventListener("click", () => {
-        showPaperInfo = !showPaperInfo;
-        setCookie("showPaperInfo", showPaperInfo, 365);
-        currentSubjectElem.style.display = showPaperInfo ? "none" : "block";
-        paperInfoElem.style.display = showPaperInfo ? "block" : "none";
+        if (!autoToggle) {
+            showPaperInfo = !showPaperInfo;
+            paperInfoElem.style.display = showPaperInfo ? "block" : "none";
+            currentSubjectElem.style.display = "block";
+            setCookie("showPaperInfo", showPaperInfo, 365);
+        }
     });
 
     function fetchData() {
@@ -106,6 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {
             if (currentSubjectElem) currentSubjectElem.style.display = showPaperInfo ? "none" : "block";
 
             if (currentExam) {
+                const currentStatus = `当前科目: ${currentExam.name}`;
+                if (!showPaperInfo) {
+                    currentSubjectElem.textContent = currentStatus;
+                }
+                currentSubjectElem.style.display = "block"; // 总是显示科目信息
+                paperInfoElem.style.display = showPaperInfo ? "block" : "none";
+
+                // 加载本地存储的页数信息
                 if (showPaperInfo) {
                     // 加载本地保存的页数信息
                     const paperCount = document.getElementById('paper-count');
@@ -127,8 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
                             console.error('加载页数信息失败:', e);
                         }
                     }
-                } else if (currentSubjectElem) {
-                    currentSubjectElem.textContent = `当前科目: ${currentExam.name}`;
                 }
 
                 if (examTimingElem) {
@@ -174,44 +192,48 @@ document.addEventListener("DOMContentLoaded", () => {
                         statusElem.style.color = "#5ba838";
                     }
                 }
-            } else if (lastExam && now < new Date(lastExam.end).getTime() + 60000) {
-                if (currentSubjectElem) currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
-                if (examTimingElem) examTimingElem.textContent = "";
-                if (remainingTimeElem) remainingTimeElem.textContent = "";
-                if (statusElem) {
-                    statusElem.textContent = "状态: 已结束";
-                    statusElem.style.color = "red";
-                }
-            } else if (nextExam) {
-                const timeUntilStart = ((new Date(nextExam.start).getTime() - now.getTime()) / 1000) + 1;
-                const remainingHours = Math.floor(timeUntilStart / 3600);
-                const remainingMinutes = Math.floor((timeUntilStart % 3600) / 60);
-                const remainingSeconds = Math.floor(timeUntilStart % 60);
-                const remainingTimeText = `${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
-
-                if (timeUntilStart <= 15 * 60) {
-                    currentSubjectElem.textContent = `即将开始: ${nextExam.name}`;
-                    remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
-                    remainingTimeElem.style.color = "orange";
-                    remainingTimeElem.style.fontWeight = "bold";
-                    statusElem.textContent = "状态: 即将开始";
-                    statusElem.style.color = "#DBA014";
-                } else {
-                    currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
-                    remainingTimeElem.textContent = "";
-                    statusElem.textContent = "状态: 未开始";
-                    remainingTimeElem.style.fontWeight = "normal";
-                    statusElem.style.color = "#EAEE5B";
-                }
-
-                examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
             } else {
-                if (currentSubjectElem) currentSubjectElem.textContent = "考试均已结束";
-                if (examTimingElem) examTimingElem.textContent = "";
-                if (remainingTimeElem) remainingTimeElem.textContent = "";
-                if (statusElem) {
-                    statusElem.textContent = "状态: 空闲";
-                    statusElem.style.color = "#3946AF";
+                // 非考试时间，显示表格
+                updateDisplay(false);
+                if (lastExam && now < new Date(lastExam.end).getTime() + 60000) {
+                    if (currentSubjectElem) currentSubjectElem.textContent = `上场科目: ${lastExam.name}`;
+                    if (examTimingElem) examTimingElem.textContent = "";
+                    if (remainingTimeElem) remainingTimeElem.textContent = "";
+                    if (statusElem) {
+                        statusElem.textContent = "状态: 已结束";
+                        statusElem.style.color = "red";
+                    }
+                } else if (nextExam) {
+                    const timeUntilStart = ((new Date(nextExam.start).getTime() - now.getTime()) / 1000) + 1;
+                    const remainingHours = Math.floor(timeUntilStart / 3600);
+                    const remainingMinutes = Math.floor((timeUntilStart % 3600) / 60);
+                    const remainingSeconds = Math.floor(timeUntilStart % 60);
+                    const remainingTimeText = `${remainingHours}时 ${remainingMinutes}分 ${remainingSeconds}秒`;
+
+                    if (timeUntilStart <= 15 * 60) {
+                        currentSubjectElem.textContent = `即将开始: ${nextExam.name}`;
+                        remainingTimeElem.textContent = `倒计时: ${remainingTimeText}`;
+                        remainingTimeElem.style.color = "orange";
+                        remainingTimeElem.style.fontWeight = "bold";
+                        statusElem.textContent = "状态: 即将开始";
+                        statusElem.style.color = "#DBA014";
+                    } else {
+                        currentSubjectElem.textContent = `下一场科目: ${nextExam.name}`;
+                        remainingTimeElem.textContent = "";
+                        statusElem.textContent = "状态: 未开始";
+                        remainingTimeElem.style.fontWeight = "normal";
+                        statusElem.style.color = "#EAEE5B";
+                    }
+
+                    examTimingElem.textContent = `起止时间: ${formatTimeWithoutSeconds(new Date(nextExam.start).toLocaleTimeString('zh-CN', { hour12: false }))} - ${formatTimeWithoutSeconds(new Date(nextExam.end).toLocaleTimeString('zh-CN', { hour12: false }))}`;
+                } else {
+                    if (currentSubjectElem) currentSubjectElem.textContent = "考试均已结束";
+                    if (examTimingElem) examTimingElem.textContent = "";
+                    if (remainingTimeElem) remainingTimeElem.textContent = "";
+                    if (statusElem) {
+                        statusElem.textContent = "状态: 空闲";
+                        statusElem.style.color = "#3946AF";
+                    }
                 }
             }
 

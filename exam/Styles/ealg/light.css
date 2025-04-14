@@ -609,17 +609,6 @@ input:checked + .slider:before {
     gap: 5px;
 }
 
-.count-control input {
-    width: 60px;
-    padding: 5px;
-    font-size: 2rem;
-    text-align: center;
-    background-color: #FFFFFF;
-    color: #1C1B1F;
-    border: 2px solid #E8DEF8;
-    border-radius: 8px;
-}
-
 .count-btn {
     display: flex;
     align-items: center;
@@ -641,4 +630,30 @@ input:checked + .slider:before {
 
 .count-btn .material-icons {
     font-size: 20px;
+}
+
+.count-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 8px;
+}
+
+.count-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.count-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.count-btn .material-icons {
+    font-size: 16px;
 }

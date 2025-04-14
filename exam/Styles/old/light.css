@@ -643,17 +643,6 @@ theme-toggle-container {
     gap: 5px;
 }
 
-.count-control input {
-    width: 60px;
-    padding: 5px;
-    font-size: 2rem;
-    text-align: center;
-    background-color: #fff;
-    color: #333;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-}
-
 .count-btn {
     display: flex;
     align-items: center;
@@ -675,4 +664,31 @@ theme-toggle-container {
 
 .count-btn .material-icons {
     font-size: 20px;
+}
+
+.count-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 8px;
+}
+
+.count-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.count-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.count-btn .material-icons {
+    font-size: 16px;
 }
