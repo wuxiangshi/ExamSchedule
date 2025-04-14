@@ -105,6 +105,15 @@
             font-weight: 500;
             color: #E6E1E5;
             animation: fadeInUp 1s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .project-logo {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
         }
 
         .material-icons {
@@ -139,7 +148,10 @@
     </style>
 </head>
 <body>
-    <div class="project-title">ExamSchedule</div>
+    <div class="project-title">
+        <img src="./icon.png" alt="ExamSchedule Logo" class="project-logo">
+        ExamSchedule
+    </div>
     <h1>选择版本：</h1>
     <ul>
         <li><a href="./time/"><span class="material-icons">schedule</span>电子钟表</a></li>
