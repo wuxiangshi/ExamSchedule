@@ -163,10 +163,10 @@ table {
 }
 
 th, td {
-    padding: 1px;
+    padding: 3px;  /* 修改padding值以匹配dark主题 */
     font-size: 1.8rem;
     text-align: center;
-    border-bottom: 1px solid #ffffff;
+    border-bottom: 1px solid #E8DEF8;  /* 修改边框颜色 */
 }
 
 th {
@@ -180,9 +180,9 @@ tr:hover {
 }
 
 .exam-status-tag {
-    padding: 6px 12px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 2px 4px;  /* 修改padding值以匹配dark主题 */
+    border-radius: 3px;  /* 修改圆角大小 */
+    font-size: 1.2rem;  /* 修改字体大小 */
     font-weight: 500;
 }
 
@@ -656,4 +656,15 @@ input:checked + .slider:before {
 
 .count-btn .material-icons {
     font-size: 16px;
+}
+
+.count-control input {
+    width: 60px;
+    padding: 5px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #1C1B1F;
+    border: 2px solid #E8DEF8;
+    border-radius: 8px;
 }
