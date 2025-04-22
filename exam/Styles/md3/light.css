@@ -327,6 +327,34 @@ tr:hover {
     font-size: 18px;
 }
 
+#save-settings-btn, #close-settings-btn {
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#save-settings-btn {
+    background-color: #6750A4;
+    color: #FFFFFF;
+}
+
+#close-settings-btn {
+    background-color: #E8DEF8;
+    color: #1C1B1F;
+}
+
+#save-settings-btn:hover, #close-settings-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
 .error-container {
     position: fixed;
     bottom: 24px;
