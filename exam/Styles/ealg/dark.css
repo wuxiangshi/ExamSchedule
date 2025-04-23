@@ -83,7 +83,6 @@ body::-webkit-scrollbar {
     max-width: 90%;
     margin: auto;
     background-color: #121212;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 h1 {
