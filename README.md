@@ -41,14 +41,9 @@
 ![time](./assets/time.png)
 
 
-
 ## 如何部署？
 
  您可以点击查看 [部署教程](https://docs.examaware.tech/app/web/web-deploy.html)了解详细的部署教程。
-
-> [!WARNING]
->
-> 注意，广播与看板的配置文件是**分开存储于两个文件夹之下的**。
 
 ## 开发说明
 
