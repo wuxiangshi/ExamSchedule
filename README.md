@@ -2,7 +2,7 @@
 
 **不只是考试看板。**
 
-![es](./doc/es.png)
+![es](./assets/main.png)
 
 ## 功能
 
@@ -30,19 +30,17 @@
 
 ### 主界面
 
-![es](./doc/es.png)
+![es](./assets/main.png)
 
 #### 考试展板界面
 
-![exam](./doc/exam.png)
+![exam](./assets/main.png)
 
 #### 电子钟表界面
 
-![time](./doc/time.png)
+![time](./assets/time.png)
 
-#### 考试广播界面
 
-![notification](./doc/notification.png)
 
 ## 如何部署？
 
