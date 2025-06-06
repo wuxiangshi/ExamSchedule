@@ -22,6 +22,26 @@ document.addEventListener("DOMContentLoaded", () => {
     let isAutoToggle = getCookie("autoToggle") || false;
     let themeConfig = [];
 
+    // 新增：检测url参数
+    function getQueryParam(name) {
+        const url = window.location.href;
+        name = name.replace(/[[]]/g, "\\$&");
+        const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        const results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+    const configUrl = getQueryParam('configUrl');
+    if (configUrl) {
+        // 禁用本地配置相关控件
+        if (configFileInput) configFileInput.disabled = true;
+        if (clearConfigBtn) clearConfigBtn.disabled = true;
+        // 隐藏或禁用相关区域
+        const configFileContainer = document.querySelector('.config-file-container');
+        if (configFileContainer) configFileContainer.style.opacity = 0.5;
+    }
+
     offsetTime = parseInt(offsetTime);
     roomElem.textContent = room;
     autoToggle.checked = isAutoToggle === "true";
@@ -116,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     configFileInput.addEventListener("change", (event) => {
+        if (configUrl) return; // 禁止导入
         try {
             const file = event.target.files[0];
             if (!file) return;
@@ -161,6 +182,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     clearConfigBtn.addEventListener("click", () => {
+        if (configUrl) return; // 禁止清除
         try {
             if (confirm("确定要清除本地配置吗？这将恢复使用默认配置文件。")) {
                 localStorage.removeItem('localExamConfig');

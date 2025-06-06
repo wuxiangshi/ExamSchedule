@@ -36,7 +36,41 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    function getQueryParam(name) {
+        const url = window.location.href;
+        name = name.replace(/[[]]/g, "\\$&");
+        const regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        const results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
     function fetchData() {
+        // 新增：支持通过url参数指定配置文件
+        const configUrl = getQueryParam('configUrl');
+        if (configUrl) {
+            // 只从指定url拉取配置，不读取本地和默认
+            return fetch(configUrl, { cache: "no-store" })
+                .then(response => {
+                    if (!response.ok) throw new Error('配置文件加载失败');
+                    return response.json();
+                })
+                .then(data => {
+                    window.examConfigData = data;
+                    // 同步提醒设置
+                    if (data.examReminders && Array.isArray(data.examReminders)) {
+                        setCookie("examReminders", encodeURIComponent(JSON.stringify(data.examReminders)), 365);
+                    }
+                    displayExamInfo(data);
+                    updateCurrentTime();
+                    updateExamInfo(data);
+                    setInterval(() => updateCurrentTime(), 1000);
+                    setInterval(() => updateExamInfo(data), 1000);
+                })
+                .catch(error => errorSystem.show('获取考试数据失败: ' + error.message));
+        }
+
         // 优先使用本地配置
         const localConfig = localStorage.getItem('localExamConfig');
         if (localConfig) {
