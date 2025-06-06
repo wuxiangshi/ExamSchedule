@@ -199,7 +199,8 @@ th {
 }
 
 tr:hover {
-    background-color: #bbdefb;
+    /* background-color: #bbdefb; */
+    background-color: inherit;
 }
 
 .exam-status-tag {

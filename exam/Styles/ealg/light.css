@@ -190,7 +190,8 @@ th {
 }
 
 tr:hover {
-    background-color: #F7F2FA;
+    /* background-color: #F7F2FA; */
+    background-color: inherit;
 }
 
 .exam-status-tag {

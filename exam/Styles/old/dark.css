@@ -191,7 +191,8 @@ th {
 }
 
 tr:hover {
-    background-color: #333;
+    /* background-color: #333; */
+    background-color: inherit;
 }
 
 table {
