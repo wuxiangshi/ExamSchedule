@@ -199,8 +199,7 @@ th {
 }
 
 tr:hover {
-    /* background-color: #bbdefb; */
-    background-color: inherit;
+    background-color: #bbdefb;
 }
 
 .exam-status-tag {
@@ -618,7 +617,26 @@ input:checked + .slider:before {
 }
 
 .paper-count-container {
-    margin: 10px 0;
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 1200;
+    background: #fff;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(60,60,60,0.08);
+    padding: 12px;
+    min-width: 220px;
+    max-width: 95vw;
+}
+
+@media (max-width: 700px) {
+    .paper-count-container {
+        right: 8px;
+        bottom: 8px;
+        padding: 8px;
+        min-width: 140px;
+    }
 }
 
 .paper-input-group {
@@ -635,23 +653,20 @@ input:checked + .slider:before {
     gap: 2px;
 }
 
-.count-control input {
-    width: 36px;
-    padding: 2px;
-    font-size: 2rem;
-    text-align: center;
-    background-color: #FFFFFF;
-    color: #1C1B1F;
-    border: 1px solid #ede7f6;
-    border-radius: 4px;
+.count-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 8px;
 }
 
 .count-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
     border: none;
     border-radius: 50%;
     background-color: #ede7f6;
@@ -665,8 +680,20 @@ input:checked + .slider:before {
     transform: none;
 }
 
-.count-btn .material-icons {
-    font-size: 20px;
+.count-btn .material-icons,
+.count-btn .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.count-control input {
+    width: 36px;
+    padding: 2px;
+    font-size: 2rem;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #1C1B1F;
+    border: 1px solid #ede7f6;
+    border-radius: 4px;
 }
 
 @keyframes fadeIn {
@@ -918,4 +945,36 @@ input:checked + .slider:before {
 #export-config-btn:hover {
     background-color: #bbdefb;
     box-shadow: 0 2px 8px rgba(25,118,210,0.08);
+}
+
+#paper-count-position {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #1565c0;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+#paper-count-position:focus {
+    outline: none;
+    border-color: #1976d2;
+    background-color: #e3f2fd;
+}
+
+.info-section .paper-count-container {
+    position: static !important;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+    min-width: 0;
+    margin-top: 8px;
+    margin-bottom: 4px;
 }

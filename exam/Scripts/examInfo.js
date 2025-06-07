@@ -415,5 +415,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
     loadPaperInfo();
 
+    function updatePaperCountPanelPosition() {
+        const pos = getCookie("paperCountPosition") || "right-bottom";
+        const panel = document.getElementById("paper-count-panel");
+        const leftInfo = document.getElementById("paper-info");
+        const rightColumn = document.querySelector(".right-column");
+        if (!panel) return;
+        if (pos === "left-info" && leftInfo) {
+            leftInfo.appendChild(panel);
+            panel.style.position = "static";
+            panel.style.marginTop = "16px";
+        } else if (pos === "right-bottom" && rightColumn) {
+            rightColumn.appendChild(panel);
+            panel.style.position = "";
+            panel.style.marginTop = "32px";
+        }
+    }
+    updatePaperCountPanelPosition();
+
+    // 监听设置变更（需在settings.js中触发事件）
+    window.addEventListener("paperCountPositionChanged", updatePaperCountPanelPosition);
+
     fetchData();
 });

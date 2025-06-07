@@ -190,8 +190,7 @@ th {
 }
 
 tr:hover {
-    /* background-color: #F7F2FA; */
-    background-color: inherit;
+    background-color: #F7F2FA;
 }
 
 .exam-status-tag {
@@ -607,7 +606,27 @@ input:checked + .slider:before {
 }
 
 .paper-count-container {
-    margin: 20px 0;
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 1200;
+    background: #fff;
+    border: 2px solid #E8DEF8;
+    border-radius: 20px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    padding: 24px;
+    min-width: 340px;
+    max-width: 95vw;
+    /* 保证移动端适配 */
+}
+
+@media (max-width: 700px) {
+    .paper-count-container {
+        right: 8px;
+        bottom: 8px;
+        padding: 8px;
+        min-width: 220px;
+    }
 }
 
 .paper-input-group {
@@ -624,12 +643,20 @@ input:checked + .slider:before {
     gap: 5px;
 }
 
+.count-btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-right: 8px;
+}
+
 .count-btn {
+    width: 24px;
+    height: 24px;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
     border: none;
     border-radius: 50%;
     background-color: #E8DEF8;
@@ -643,33 +670,8 @@ input:checked + .slider:before {
     transform: translateY(-1px);
 }
 
-.count-btn .material-icons {
-    font-size: 20px;
-}
-
-.count-btn-group {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-right: 8px;
-}
-
-.count-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.count-btn {
-    width: 24px;
-    height: 24px;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.count-btn .material-icons {
+.count-btn .material-icons,
+.count-btn .material-symbols-outlined {
     font-size: 16px;
 }
 
@@ -971,191 +973,36 @@ input:checked + .slider:before {
     color: #1C1B1F;
 }
 
-.reminder-table {
+/* 设置弹窗下拉框样式 */
+#paper-count-position {
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
-    margin-bottom: 24px;
-    background: #fff;
-    border-radius: 16px;
-    overflow: hidden;
-    table-layout: fixed;
-}
-
-.reminder-table th, .reminder-table td {
-    padding: 16px 8px;
-    font-size: 1.4rem;
-    text-align: center;
-    border-bottom: 1px solid #E8DEF8;
-    vertical-align: middle;
-    word-break: break-all;
-}
-
-.reminder-table th {
-    background: #E8DEF8;
+    padding: 12px 16px;
+    font-size: 1.2rem;
+    background-color: #FFFFFF;
     color: #1C1B1F;
-    font-weight: 500;
-}
-
-.reminder-table tr:last-child td {
-    border-bottom: none;
-}
-
-.reminder-table th:nth-child(1),
-.reminder-table td:nth-child(1) {
-    width: 50%;
-    text-align: left;
-    padding-left: 20px;
-}
-.reminder-table th:nth-child(2),
-.reminder-table td:nth-child(2) {
-    width: 15%;
-}
-.reminder-table th:nth-child(3),
-.reminder-table td:nth-child(3) {
-    width: 25%;
-}
-.reminder-table th:nth-child(4),
-.reminder-table td:nth-child(4) {
-    width: 10%;
-}
-
-.reminder-table .action-btn {
-    padding: 8px 18px;
-    border-radius: 16px;
-    background: #E8DEF8;
-    color: #1C1B1F;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin: 0 auto;
-    display: block;
-}
-
-.reminder-table .action-btn:hover {
-    background: #D0BCFF;
-}
-
-.reminder-btn {
-    padding: 8px 18px;
-    border-radius: 16px;
-    background: #FFDAD6;
-    color: #5C1130;
-    border: none;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin: 0 auto;
-    display: block;
-}
-
-.reminder-btn:hover {
-    background: #FFB4AB;
-}
-
-.reminder-select {
-    width: 100%;
-    padding: 8px 12px;
-    font-size: 1.1rem;
     border: 2px solid #E8DEF8;
-    border-radius: 10px;
-    background: #fff;
-    color: #1C1B1F;
-    transition: border-color 0.2s;
-    outline: none;
-}
-
-.reminder-select:focus {
-    border-color: #6750A4;
-}
-
-.reminder-time-input {
-    width: 80px;
-    padding: 8px 12px;
-    font-size: 1.1rem;
-    border: 2px solid #E8DEF8;
-    border-radius: 10px;
-    background: #fff;
-    color: #1C1B1F;
-    transition: border-color 0.2s;
-    outline: none;
-    text-align: center;
-}
-
-.reminder-time-input:focus {
-    border-color: #6750A4;
-}
-
-/* 统一按钮组样式，修复确定/取消按钮位置和风格 */
-#reminder-modal-content .button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-    margin-top: 32px;
-    background: #fff;
-    border-top: 1px solid #E8DEF8;
-    padding: 16px 0 0 0;
-    border-radius: 0 0 28px 28px;
-}
-
-#save-reminder-btn, #close-reminder-btn, #stop-audio-btn {
-    padding: 12px 24px;
-    border-radius: 20px;
-    font-size: 16px;
-    font-weight: 500;
-    border: none;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    margin-bottom: 8px;
+    margin-top: 4px;
+    appearance: none;
+    -webkit-appearance: none;
 }
 
-#save-reminder-btn {
-    background-color: #6750A4;
-    color: #fff;
+#paper-count-position:focus {
+    outline: none;
+    border-color: #6750A4;
+    background-color: #F7F2FA;
 }
 
-#close-reminder-btn {
-    background-color: #E8DEF8;
-    color: #1C1B1F;
-}
-
-#stop-audio-btn {
-    background-color: #FFDAD6;
-    color: #5C1130;
-}
-
-#save-reminder-btn:hover, #close-reminder-btn:hover, #stop-audio-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-#stop-audio-btn:hover {
-    background-color: #FFB4AB;
-    color: #5C1130;
-}
-
-/* 导出按钮样式 */
-#export-config-btn {
-    margin-top: 12px;
-    padding: 12px 28px;
-    background-color: #E8DEF8;
-    color: #1C1B1F;
+/* 左侧信息区内的数量控制区样式适配 */
+.info-section .paper-count-container {
+    position: static !important;
+    box-shadow: none;
     border: none;
-    border-radius: 24px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-#export-config-btn:hover {
-    background-color: #D0BCFF;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    background: transparent;
+    padding: 0;
+    min-width: 0;
+    margin-top: 16px;
+    margin-bottom: 8px;
 }

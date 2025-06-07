@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const clearConfigBtn = document.getElementById("clear-config-btn");
     const themeSelect = document.getElementById("theme-select");
     const autoToggle = document.getElementById("auto-toggle");
+    const paperCountPositionSelect = document.getElementById("paper-count-position");
 
     let offsetTime = getCookie("offsetTime") || 0;
     let room = getCookie("room") || "";
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentTheme = getCookie("currentTheme") || "ealg";
     let theme = getCookie("theme") || "dark";
     let isAutoToggle = getCookie("autoToggle") || false;
+    let paperCountPosition = getCookie("paperCountPosition") || "right-bottom";
     let themeConfig = [];
 
     // 新增：检测url参数
@@ -74,12 +76,18 @@ document.addEventListener("DOMContentLoaded", () => {
         themeLink.href = `Styles/${themePath}/${isDark ? 'dark' : 'light'}.css`;
     }
 
+    // 初始化下拉框
+    if (paperCountPositionSelect) {
+        paperCountPositionSelect.value = paperCountPosition;
+    }
+
     settingsBtn.addEventListener("click", () => {
         try {
             offsetTimeInput.value = offsetTime;
             roomInput.value = room;
             zoomInput.value = zoomLevel;
             settingsModal.style.display = "block";
+            if (paperCountPositionSelect) paperCountPositionSelect.value = paperCountPosition;
         } catch (e) {
             errorSystem.show('打开设置失败: ' + e.message);
         }
@@ -105,12 +113,14 @@ document.addEventListener("DOMContentLoaded", () => {
             theme = themeToggle.checked ? "light" : "dark";
             currentTheme = themeSelect.value;
             isAutoToggle = autoToggle.checked;
+            paperCountPosition = paperCountPositionSelect.value;
             setCookie("offsetTime", offsetTime, 365);
             setCookie("room", room, 365);
             setCookie("zoomLevel", zoomLevel, 365);
             setCookie("theme", theme, 365);
             setCookie("currentTheme", currentTheme, 365);
             setCookie("autoToggle", isAutoToggle, 365);
+            setCookie("paperCountPosition", paperCountPosition, 365);
             roomElem.textContent = room;
             document.body.style.zoom = zoomLevel;
             updateThemeLink();
@@ -121,6 +131,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 300);
             // 立即生效时间偏移
             location.reload();
+            // 通知 examInfo.js 更新数量控制区位置
+            window.dispatchEvent(new Event("paperCountPositionChanged"));
         } catch (e) {
             errorSystem.show('保存设置失败: ' + e.message);
         }
@@ -211,12 +223,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 theme = themeToggle.checked ? "light" : "dark";
                 currentTheme = themeSelect.value;
                 isAutoToggle = autoToggle.checked;
+                paperCountPosition = paperCountPositionSelect.value;
                 setCookie("offsetTime", offsetTime, 365);
                 setCookie("room", room, 365);
                 setCookie("zoomLevel", zoomLevel, 365);
                 setCookie("theme", theme, 365);
                 setCookie("currentTheme", currentTheme, 365);
                 setCookie("autoToggle", isAutoToggle, 365);
+                setCookie("paperCountPosition", paperCountPosition, 365);
                 roomElem.textContent = room;
                 document.body.style.zoom = zoomLevel;
                 updateThemeLink();
@@ -227,9 +241,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 }, 300);
                 // 立即生效时间偏移
                 location.reload();
+                // 通知 examInfo.js 更新数量控制区位置
+                window.dispatchEvent(new Event("paperCountPositionChanged"));
             } catch (e) {
                 errorSystem.show('保存设置失败: ' + e.message);
             }
         }
     });
+
+    if (paperCountPositionSelect) {
+        paperCountPositionSelect.addEventListener("change", () => {
+            paperCountPosition = paperCountPositionSelect.value;
+            setCookie("paperCountPosition", paperCountPosition, 365);
+            window.dispatchEvent(new Event("paperCountPositionChanged"));
+        });
+    }
 });

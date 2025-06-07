@@ -38,62 +38,7 @@
                     <div id="current-subject"></div>
                     <div id="exam-timing"></div>
                     <div id="paper-info" style="display: none;">
-                        <div class="paper-count-container">
-                            <div class="paper-input-group">
-                                <label>试卷:</label>
-                                <div class="count-control">
-                                    <div class="count-btn-group">
-                                        <button class="count-btn" data-target="paper-count" data-action="decrease">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </button>
-                                        <button class="count-btn" data-target="paper-count" data-action="increase">
-                                            <span class="material-symbols-outlined">add</span>
-                                        </button>
-                                    </div>
-                                    <input type="number" id="paper-count" min="0" value="0">
-                                </div>
-                                <span>张</span>
-                                <div class="count-control">
-                                    <div class="count-btn-group">
-                                        <button class="count-btn" data-target="paper-pages" data-action="decrease">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </button>
-                                        <button class="count-btn" data-target="paper-pages" data-action="increase">
-                                            <span class="material-symbols-outlined">add</span>
-                                        </button>
-                                    </div>
-                                    <input type="number" id="paper-pages" min="0" value="0">
-                                </div>
-                                <span>页</span>
-                            </div>
-                            <div class="paper-input-group">
-                                <label>答题卡:</label>
-                                <div class="count-control">
-                                    <div class="count-btn-group">
-                                        <button class="count-btn" data-target="sheet-count" data-action="decrease">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </button>
-                                        <button class="count-btn" data-target="sheet-count" data-action="increase">
-                                            <span class="material-symbols-outlined">add</span>
-                                        </button>
-                                    </div>
-                                    <input type="number" id="sheet-count" min="0" value="0">
-                                </div>
-                                <span>张</span>
-                                <div class="count-control">
-                                    <div class="count-btn-group">
-                                        <button class="count-btn" data-target="sheet-pages" data-action="decrease">
-                                            <span class="material-symbols-outlined">remove</span>
-                                        </button>
-                                        <button class="count-btn" data-target="sheet-pages" data-action="increase">
-                                            <span class="material-symbols-outlined">add</span>
-                                        </button>
-                                    </div>
-                                    <input type="number" id="sheet-pages" min="0" value="0">
-                                </div>
-                                <span>页</span>
-                            </div>
-                        </div>
+                        <!-- 数量控制区可选放这里 -->
                     </div>
                     <div id="remaining-time"></div>
                     <div id="status"></div>
@@ -114,6 +59,64 @@
                         <!-- Dynamically filled by JavaScript -->
                     </tbody>
                 </table>
+                <!-- 数量控制区加id，便于JS移动 -->
+                <div class="paper-count-container" id="paper-count-panel" style="margin-top:32px;">
+                    <div class="paper-input-group">
+                        <label>试卷:</label>
+                        <div class="count-control">
+                            <div class="count-btn-group">
+                                <!-- 先加后减 -->
+                                <button class="count-btn" data-target="paper-count" data-action="increase">
+                                    <span class="material-symbols-outlined">add</span>
+                                </button>
+                                <button class="count-btn" data-target="paper-count" data-action="decrease">
+                                    <span class="material-symbols-outlined">remove</span>
+                                </button>
+                            </div>
+                            <input type="number" id="paper-count" min="0" value="0">
+                        </div>
+                        <span>张</span>
+                        <div class="count-control">
+                            <div class="count-btn-group">
+                                <button class="count-btn" data-target="paper-pages" data-action="increase">
+                                    <span class="material-symbols-outlined">add</span>
+                                </button>
+                                <button class="count-btn" data-target="paper-pages" data-action="decrease">
+                                    <span class="material-symbols-outlined">remove</span>
+                                </button>
+                            </div>
+                            <input type="number" id="paper-pages" min="0" value="0">
+                        </div>
+                        <span>页</span>
+                    </div>
+                    <div class="paper-input-group">
+                        <label>答题卡:</label>
+                        <div class="count-control">
+                            <div class="count-btn-group">
+                                <button class="count-btn" data-target="sheet-count" data-action="increase">
+                                    <span class="material-symbols-outlined">add</span>
+                                </button>
+                                <button class="count-btn" data-target="sheet-count" data-action="decrease">
+                                    <span class="material-symbols-outlined">remove</span>
+                                </button>
+                            </div>
+                            <input type="number" id="sheet-count" min="0" value="0">
+                        </div>
+                        <span>张</span>
+                        <div class="count-control">
+                            <div class="count-btn-group">
+                                <button class="count-btn" data-target="sheet-pages" data-action="increase">
+                                    <span class="material-symbols-outlined">add</span>
+                                </button>
+                                <button class="count-btn" data-target="sheet-pages" data-action="decrease">
+                                    <span class="material-symbols-outlined">remove</span>
+                                </button>
+                            </div>
+                            <input type="number" id="sheet-pages" min="0" value="0">
+                        </div>
+                        <span>页</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -154,6 +157,12 @@
                     <input type="checkbox" id="auto-toggle">
                     <span class="slider round"></span>
                 </label>
+                <!-- 新增数量控制区位置选择 -->
+                <label for="paper-count-position">数量控制区位置:</label>
+                <select id="paper-count-position">
+                    <option value="right-bottom">右下角浮窗</option>
+                    <option value="left-info">左侧信息区</option>
+                </select>
             </div>
             <div class="button-group">
                 <button id="save-settings-btn" class="control-btn">确定</button>
