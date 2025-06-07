@@ -34,7 +34,7 @@
 
 #### 考试展板界面
 
-![exam](./assets/main.png)
+![exam](./assets/exam.png)
 
 #### 电子钟表界面
 
